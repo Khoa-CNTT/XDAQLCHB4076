@@ -1,0 +1,20 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'MilkShopProject' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for MilkShopProject
+  pod 'SwifterSwift', '~> 6.2'
+  pod 'Kingfisher'
+  pod 'Nuke', '~> 10.7'
+  pod 'lottie-ios', '~> 4.4'
+  pod 'CryptoSwift'
+  pod 'FirebaseAuth'
+  pod 'FirebaseFirestore'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Database'
+  pod 'MBProgressHUD', '~> 1.2'
+  pod 'JXPageControl'
+end
