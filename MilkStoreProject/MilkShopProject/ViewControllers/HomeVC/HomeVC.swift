@@ -10,7 +10,9 @@ import JXPageControl
 
 class HomeVC: BaseViewController {
     
-    @IBOutlet weak var productTableView: UITableView!
+    @IBOutlet weak var containerFreshMilkView: UIView!
+    @IBOutlet weak var freshMilkClsView: UICollectionView!
+    @IBOutlet weak var productPromotionClsView: UICollectionView!
     @IBOutlet weak var pageController: JXPageControlScale!
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var homeClsView: UICollectionView!
@@ -21,16 +23,26 @@ class HomeVC: BaseViewController {
             pageController.progress = CGFloat(currentPage)
         }
     }
-    private var arrDataStep: [String] = [
-        "imgOnboard_1",
-        "imgOnboard_2"
-    ]
+    private var arrDataStep: [String] = ["imgOnboard_1","imgOnboard_2"]
     var timer: Timer?
+    var milk: Milks?
+    private var freshMilkData: [DataMilk] = []
+    private var promotionMilkData: [DataMilk] = []
+    private var isDropwDownFreshMilkOpen: Bool = false {
+        didSet {
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTableView()
+        milk = loadMilksFromJSON()
+        
+        if let dataMilk = milk?.dataMilk {
+            freshMilkData = dataMilk.filter { $0.type == "Sữa tươi" }
+            promotionMilkData = dataMilk.filter { $0.type == "Sản phẩm khuyến mại" }
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -45,10 +57,45 @@ class HomeVC: BaseViewController {
         setupAutoScroll()
     }
     
+    //MARK: Events
+    @IBAction func didTapDropdownMenu(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            self.containerFreshMilkView.isHidden = true
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
+        default:
+            print("Default")
+        }
+    }
+    
+    //MARK: Method
     private func handleSetupCollectionView() {
         self.homeClsView.register(nibWithCellClass: OnboardClsCell.self)
         self.homeClsView.dataSource = self
         self.homeClsView.delegate = self
+        
+        self.productPromotionClsView.register(nibWithCellClass: ProductsCell.self)
+        self.productPromotionClsView.dataSource = self
+        self.productPromotionClsView.delegate = self
+        
+        self.freshMilkClsView.register(nibWithCellClass: ProductsCell.self)
+        self.freshMilkClsView.dataSource = self
+        self.freshMilkClsView.delegate = self
+        
+        // Trong handleSetupCollectionView()
+        if let layout = freshMilkClsView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 8
+            layout.minimumInteritemSpacing = 8
+            
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            
+            freshMilkClsView.isPagingEnabled = true
+            freshMilkClsView.decelerationRate = .fast
+            freshMilkClsView.showsHorizontalScrollIndicator = false
+        }
     }
     
     private func setupPageControl() {
@@ -74,37 +121,54 @@ class HomeVC: BaseViewController {
         let indexPath = IndexPath(item: currentPage, section: 0)
         homeClsView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
-    
-    private func setupTableView() {
-        productTableView.delegate = self
-        productTableView.dataSource = self
-        
-        // Register cell types
-        productTableView.register(cellWithClass: RecommendedProductsCell.self)
-        productTableView.register(cellWithClass: PromotedProductsCell.self)
-    }
-    
-    private func fetchData() {
-        // Fill with your API call or mock data
-    }
 }
 
 extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        switch collectionView {
+        case homeClsView:
+            return 2
+        case freshMilkClsView:
+            return freshMilkData.count
+        default:
+            return promotionMilkData.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withClass: OnboardClsCell.self, for: indexPath)
-        cell.onboardImageView.image = UIImage(named: arrDataStep[indexPath.row])
-        return cell
+        switch collectionView {
+        case homeClsView:
+            let cell = collectionView.dequeueReusableCell(withClass: OnboardClsCell.self, for: indexPath)
+            cell.onboardImageView.image = UIImage(named: arrDataStep[indexPath.row])
+            return cell
+        case productPromotionClsView:
+            let cell = collectionView.dequeueReusableCell(withClass: ProductsCell.self, for: indexPath)
+            
+            cell.configCell(products: promotionMilkData[indexPath.row])
+            return cell
+        default:
+            let cell = collectionView.dequeueReusableCell(withClass: ProductsCell.self, for: indexPath)
+            cell.configCell(products: freshMilkData[indexPath.row])
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.width
-        let height = collectionView.height
-        
-        return CGSize(width: width, height: height)
+        switch collectionView {
+        case homeClsView:
+            let width = collectionView.width
+            let height = collectionView.height
+            
+            return CGSize(width: width, height: height)
+        case productPromotionClsView:
+            return CGSize(width: (UIScreen.main.bounds.width - 30) / 2, height: collectionView.height)
+        default:
+            let pageWidth = collectionView.frame.width
+            let itemWidth = (pageWidth - 8) / 2
+            let itemHeight = (collectionView.frame.height - 8) / 2
+            
+            return CGSize(width: itemWidth, height: itemHeight)
+        }
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -113,60 +177,25 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource,UICollecti
         currentPage = Int(scrollView.contentOffset.x / width)
     }
     
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        guard scrollView == freshMilkClsView else { return }
+
+        let layout = freshMilkClsView.collectionViewLayout as! UICollectionViewFlowLayout
+        let cellWidth = layout.itemSize.width
+        let spacing = layout.minimumLineSpacing
+        
+        // Calculate the width of 2 columns (not 4)
+        let pageWidth = (cellWidth + spacing) * 2
+        
+        // Calculate which page to snap to
+        let targetX = targetContentOffset.pointee.x
+        let newTargetX = round(targetX / pageWidth) * pageWidth
+        
+        targetContentOffset.pointee = CGPoint(x: newTargetX, y: 0)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
     }
 }
 
-// MARK: - TableView DataSource & Delegate
-extension HomeVC: UITableViewDataSource, UITableViewDelegate {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withClass: PromotedProductsCell.self)
-//            cell.configure(with: promotedProducts)
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withClass: RecommendedProductsCell.self)
-//            cell.configure(with: recommendedProducts)
-            return cell
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 50))
-        headerView.backgroundColor = section == 0 ? .white : UIColor(red: 135/255, green: 206/255, blue: 235/255, alpha: 1.0)
-        
-        let titleLabel = UILabel(frame: CGRect(x: 16, y: 0, width: tableView.frame.width - 32, height: 50))
-        titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
-        titleLabel.textColor = section == 0 ? UIColor(red: 135/255, green: 206/255, blue: 235/255, alpha: 1.0) : .white
-        titleLabel.text = section == 0 ? "KHUYẾN MẠI NỔI BẬT" : "SẢN PHẨM DÀNH CHO BẠN"
-        
-        headerView.addSubview(titleLabel)
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 240
-        } else {
-
-            let productCount = 10
-            let rowCount = (productCount + 1) / 2
-            return CGFloat(rowCount * 250)
-        }
-    }
-}

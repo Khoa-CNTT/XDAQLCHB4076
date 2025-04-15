@@ -99,5 +99,5 @@ public enum UDKey<T>: String, UD {
     case address = "address"
     case passWord = "passWord"
     case authenCode = "authenCode"
-    
+    case isLoginSuccess = "isLoginSuccess"
 }

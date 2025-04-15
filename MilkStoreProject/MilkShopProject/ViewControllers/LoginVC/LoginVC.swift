@@ -34,6 +34,7 @@ class LoginVC: BaseViewController {
         setupTF()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        handleDataTextField()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -68,7 +69,7 @@ class LoginVC: BaseViewController {
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-//                self?.push(TabbarVC())
+                self?.push(TabbarCustomController())
                 #warning("need check")
                 print("Push Tabbar")
             }
@@ -78,10 +79,10 @@ class LoginVC: BaseViewController {
     func handleDataTextField() {
         if phoneAccount.isValidEmail && passwordAccount.isEmpty == false {
             loginButton.isEnabled = true
-            loginButton.backgroundColor = UIColor(hexString: "FFA447")
+            loginButton.backgroundColor = UIColor(hexString: "083F78")
         } else {
             loginButton.isEnabled = false
-            loginButton.backgroundColor = UIColor(hexString: "FFA447").withAlphaComponent(0.5)
+            loginButton.backgroundColor = UIColor(hexString: "083F78").withAlphaComponent(0.5)
         }
         print("[HL-LOG] Email = \(phoneAccount) - Password: \(passwordAccount)")
     }
@@ -157,7 +158,8 @@ extension LoginVC {
                         }
                         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                             #warning("need check")
-//                                    self.push(TabbarVC())
+                            self.push(TabbarCustomController())
+                            UDHelper.isLoginSuccess = true
                             print("login success")
                         }
                     } else {

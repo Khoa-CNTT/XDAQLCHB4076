@@ -5,6 +5,8 @@
 //  Created by CongDev on 8/4/25.
 //
 
+import Foundation
+
 struct Milks: Codable {
     let dataMilk: [DataMilk]?
     
@@ -60,5 +62,24 @@ struct Detail: Codable {
         case protein
         case carbohydrates
         case calcium
+    }
+}
+
+func loadMilksFromJSON() -> Milks? {
+    guard let path = Bundle.main.path(forResource: "Milk Data", ofType: "json") else {
+        print("Không tìm thấy file JSON")
+        return nil
+    }
+    
+    do {
+        let data = try Data(contentsOf: URL(fileURLWithPath: path))
+        
+        let decoder = JSONDecoder()
+        let milksData = try decoder.decode(Milks.self, from: data)
+        
+        return milksData
+    } catch {
+        print("Lỗi khi đọc hoặc parse JSON: \(error)")
+        return nil
     }
 }

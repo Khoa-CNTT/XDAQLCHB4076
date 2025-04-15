@@ -183,4 +183,14 @@ struct UDHelper {
             UDKey.email.set(newValue)
         }
     }
+    
+    static var isLoginSuccess: Bool {
+        get {
+            UDKey.isLoginSuccess.value.unwrapped(or: false)
+        }
+        
+        set {
+            UDKey.isLoginSuccess.set(newValue)
+        }
+    }
 }

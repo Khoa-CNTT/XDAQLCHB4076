@@ -13,7 +13,7 @@ class SplashVC: UIViewController {
         super.viewDidLoad()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            AppDelegate.setRoot(LoginVC(), isNavi: true)
+            AppDelegate.setRoot(UDHelper.isLoginSuccess ? TabbarCustomController() : LoginVC(), isNavi: true)
         }
     }
 

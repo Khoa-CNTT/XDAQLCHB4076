@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func configWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
-        let splashVC = UINavigationController(rootViewController: HomeVC())
+        let splashVC = UINavigationController(rootViewController: SplashVC())
         window?.rootViewController = splashVC
         window?.makeKeyAndVisible()
     }
