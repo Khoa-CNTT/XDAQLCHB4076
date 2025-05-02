@@ -133,6 +133,25 @@ class BaseViewController: UIViewController {
 
         return isLengthValid && containsUppercase && containsLowercase && containsNumber && containsSpecialCharacter && passwordsMatch
     }
+    
+    func formattedDescription(from rawText: String) -> String {
+        var cleaned = rawText.trimmingCharacters(in: .whitespacesAndNewlines)
+        cleaned = cleaned.replacingOccurrences(of: "\"", with: "")
+        
+        let lines = cleaned.components(separatedBy: "\n").map { line -> String in
+            let trimmed = line.trimmingCharacters(in: .whitespacesAndNewlines)
+            return trimmed.isEmpty ? "" : "• \(trimmed)"
+        }
+
+        return lines.filter { !$0.isEmpty }.joined(separator: "\n\n")
+    }
+    
+    func convertPriceToInt(_ priceString: String) -> Int? {
+        let cleanedPrice = priceString.replacingOccurrences(of: " đ", with: "")
+        let cleanedPriceWithoutDot = cleanedPrice.replacingOccurrences(of: ".", with: "")
+        
+        return Int(cleanedPriceWithoutDot)
+    }
 }
 
 

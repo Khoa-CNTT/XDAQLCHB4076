@@ -17,4 +17,5 @@ target 'MilkShopProject' do
   pod 'Firebase/Database'
   pod 'MBProgressHUD', '~> 1.2'
   pod 'JXPageControl'
+  pod 'RealmSwift', '~> 20.0'
 end

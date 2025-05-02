@@ -271,6 +271,20 @@ extension UIViewController {
         
         return formatter.string(fromByteCount: Int64(sizeOnDisk))
     }
+    
+    func setUpTableView(_ tableView: UITableView, _ cell: UITableViewCell.Type, completion: (() -> ())? = nil){
+        tableView.dataSource = self as? any UITableViewDataSource
+        tableView.delegate = self as? any UITableViewDelegate
+        tableView.register(nibWithCellClass: cell.self)
+        tableView.reloadData()
+    }
+    
+    func setUpCollectionView(_ collectionView: UICollectionView, _ cell: UICollectionViewCell.Type, completion: (() -> ())? = nil){
+        collectionView.dataSource = self as? any UICollectionViewDataSource
+        collectionView.delegate = self as? any UICollectionViewDelegate
+        collectionView.register(nibWithCellClass: cell.self)
+        collectionView.reloadData()
+    }
 }
 
 extension UIViewController {

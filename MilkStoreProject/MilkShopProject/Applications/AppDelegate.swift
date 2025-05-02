@@ -8,6 +8,8 @@
 import UIKit
 //import zpdk
 import FirebaseCore
+import FirebaseFirestore
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -7,79 +7,67 @@
 
 import Foundation
 
-struct Milks: Codable {
-    let dataMilk: [DataMilk]?
-    
+class Milks: Codable {
+    var dataMilk: [DataMilk]?
+
     enum CodingKeys: String, CodingKey {
         case dataMilk
     }
 }
 
-struct DataMilk: Codable {
-    let type: String?
-    let nameMilk: String?
-    let imgMilk: String?
-    let price: String?
-    let detail: [Detail]?
-    
+class DataMilk: Codable {
+    var idProduct: String?
+    var type: String?
+    var nameMilk: String?
+    var imgMilk: String?
+    var price: String?
+    var detail: [Detail]?
+    var priceInput: Int?
+    var priceSell: Int?
+    var quantity: Int?
+    var totalImport: Int?
+    var totalSell: Int?
+    var sell: Int?
+
     enum CodingKeys: String, CodingKey {
-        case type
-        case nameMilk
-        case imgMilk
-        case price
-        case detail
+        case idProduct, type, nameMilk, imgMilk, price, detail, priceInput, totalImport, priceSell, quantity, totalSell, sell
     }
 }
 
-struct Detail: Codable {
-    let trademark: String?
-    let brandOrigin: String?
-    let placeOfManufacture: String?
-    let ingredient: String?
-    let expiry: String?
-    let userManual: String?
-    let storageInstructions: String?
-    let packaging: String?
-    let description: String?
-    let energy: String?
-    let fat: String?
-    let protein: String?
-    let carbohydrates: String?
-    let calcium: String?
-    
+class Detail: Codable {
+    var trademark: String?
+    var brandOrigin: String?
+    var placeOfManufacture: String?
+    var ingredient: String?
+    var expiry: String?
+    var userManual: String?
+    var storageInstructions: String?
+    var packaging: String?
+    var description: String?
+    var energy: String?
+    var fat: String?
+    var protein: String?
+    var carbohydrates: String?
+    var calcium: String?
+
     enum CodingKeys: String, CodingKey {
-        case trademark
-        case brandOrigin
-        case placeOfManufacture
-        case ingredient
-        case expiry
-        case userManual
-        case storageInstructions
-        case packaging
-        case description
-        case energy
-        case fat
-        case protein
-        case carbohydrates
-        case calcium
+        case trademark, brandOrigin, placeOfManufacture, ingredient, expiry, userManual, storageInstructions, packaging, description, energy, fat, protein, carbohydrates, calcium
     }
 }
 
-func loadMilksFromJSON() -> Milks? {
-    guard let path = Bundle.main.path(forResource: "Milk Data", ofType: "json") else {
-        print("Không tìm thấy file JSON")
-        return nil
+func generateRandomID(type: String) -> String {
+    let prefix = type
+    let length = 10
+
+    let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    var randomString = ""
+
+    for _ in 0..<length {
+        if let randomChar = characters.randomElement() {
+            randomString.append(randomChar)
+        }
     }
-    
-    do {
-        let data = try Data(contentsOf: URL(fileURLWithPath: path))
-        
-        let decoder = JSONDecoder()
-        let milksData = try decoder.decode(Milks.self, from: data)
-        
-        return milksData
-    } catch {
-        print("Lỗi khi đọc hoặc parse JSON: \(error)")
-        return nil
-    }
+
+    return prefix + randomString
 }
+

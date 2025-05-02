@@ -21,6 +21,9 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProducts" translatesAutoresizingMaskIntoConstraints="NO" id="JgO-Qe-TKr">
                                 <rect key="frame" x="0.0" y="8" width="275" height="107.66666666666667"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="107.67" id="jPC-ol-m71"/>
+                                </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sữa Tươi Tiệt Trùng Nguyên Chất TH true MILK 180 ml" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2S-a3-NQV">
                                 <rect key="frame" x="16" y="123.66666666666667" width="243" height="26.333333333333329"/>
@@ -51,6 +54,7 @@
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="JMk-lP-Mhv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="54C-o0-RTa"/>
                 <constraint firstAttribute="trailing" secondItem="JMk-lP-Mhv" secondAttribute="trailing" constant="10" id="9wW-Wz-pSc"/>

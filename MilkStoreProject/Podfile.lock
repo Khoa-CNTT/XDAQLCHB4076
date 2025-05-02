@@ -1347,6 +1347,11 @@ PODS:
   - nanopb/decode (3.30910.0)
   - nanopb/encode (3.30910.0)
   - Nuke (10.7.1)
+  - Realm (20.0.0):
+    - Realm/Headers (= 20.0.0)
+  - Realm/Headers (20.0.0)
+  - RealmSwift (20.0.0):
+    - Realm (= 20.0.0)
   - RecaptchaInterop (100.0.0)
   - SwifterSwift (6.2.0):
     - SwifterSwift/AppKit (= 6.2.0)
@@ -1393,6 +1398,7 @@ DEPENDENCIES:
   - lottie-ios (~> 4.4)
   - MBProgressHUD (~> 1.2)
   - Nuke (~> 10.7)
+  - RealmSwift (~> 20.0)
   - SwifterSwift (~> 6.2)
 
 SPEC REPOS:
@@ -1423,6 +1429,8 @@ SPEC REPOS:
     - MBProgressHUD
     - nanopb
     - Nuke
+    - Realm
+    - RealmSwift
     - RecaptchaInterop
     - SwifterSwift
 
@@ -1453,9 +1461,11 @@ SPEC CHECKSUMS:
   MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
   nanopb: fad817b59e0457d11a5dfbde799381cd727c1275
   Nuke: 279f17a599fd1c83cf51de5e0e1f2db143a287b0
+  Realm: a799b5f9145623fb0bfe149fe81422863631dd0f
+  RealmSwift: f8c4354ebd5053343e6ab9f4eda244145308a51e
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   SwifterSwift: dd00873fb09cde19da88bdb2878f9fe70fe27b0f
 
-PODFILE CHECKSUM: 484c50dbfcc61b05e237af26704fa637938b451a
+PODFILE CHECKSUM: 3d4bbc389ce2d3938865402300095ecb6f78249b
 
 COCOAPODS: 1.16.2

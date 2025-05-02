@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashVC" customModule="MilkShopProject" customModuleProvider="target">
             <connections>
+                <outlet property="loadingAnimationView" destination="Q6f-SJ-PHc" id="Os9-CS-ISW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,13 +21,23 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bgSplash" translatesAutoresizingMaskIntoConstraints="NO" id="Z5F-OF-mx0">
                     <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                 </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q6f-SJ-PHc" customClass="LottieAnimationView" customModule="Lottie">
+                    <rect key="frame" x="146.66666666666666" y="448.66666666666669" width="100" height="100.00000000000006"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Q6f-SJ-PHc" secondAttribute="height" id="fR4-k8-9IN"/>
+                        <constraint firstAttribute="height" constant="100" id="uRG-po-E9u"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="Q6f-SJ-PHc" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="KSY-CX-2ch"/>
                 <constraint firstAttribute="bottom" secondItem="Z5F-OF-mx0" secondAttribute="bottom" id="YtX-YF-UUm"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Z5F-OF-mx0" secondAttribute="trailing" id="fbT-ER-toS"/>
                 <constraint firstItem="Z5F-OF-mx0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="n1R-Sb-35k"/>
+                <constraint firstItem="Q6f-SJ-PHc" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" constant="60" id="wqM-UP-z0n"/>
                 <constraint firstItem="Z5F-OF-mx0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="yTp-Xj-15p"/>
             </constraints>
             <point key="canvasLocation" x="132" y="-11"/>

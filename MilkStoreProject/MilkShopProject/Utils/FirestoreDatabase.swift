@@ -20,14 +20,15 @@ class FirestoreDatabaseManager {
     // Account Info
 
     func writeAccountInfoDataToFirestore(account_info: AccountInfoModel) {
+        print("[HL-LOG] Đang cố gắng ghi vào Firestore với dữ liệu: \(account_info)")
         let db = Firestore.firestore()
         let accountInfoRef = db.collection("usernew").document("\(UUID().uuidString)")
 
         accountInfoRef.setData(account_info.dictionary) { error in
             if let error = error {
-                print("[HL-LOG] Error writing document: \(error)")
+                print("[HL-LOG] Lỗi khi ghi tài liệu: \(error)")
             } else {
-                print("[HL-LOG] Document successfully written!")
+                print("[HL-LOG] Tài liệu đã được ghi thành công!")
             }
         }
     }

@@ -62,6 +62,13 @@ extension String {
         let okayChars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890")
         return self.filter {okayChars.contains($0) }
     }
+    
+    func convertPriceToInt(_ priceString: String) -> Int? {
+        let cleanedPrice = priceString.replacingOccurrences(of: " đ", with: "")
+        let cleanedPriceWithoutDot = cleanedPrice.replacingOccurrences(of: ".", with: "")
+        
+        return Int(cleanedPriceWithoutDot)
+    }
 }
 
 extension Decimal {
