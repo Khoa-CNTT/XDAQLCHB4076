@@ -118,53 +118,65 @@ extension LoginVC {
     private func login() {
         Auth.auth().signIn(withEmail: phoneAccount, password: passwordAccount) { [weak self] _, error in
             guard let self = self else { return }
+
             if let error = error {
-                // View Error
                 if self.errorCount < 3 {
                     DispatchQueue.main.async {
                         let popUpView = PopUpErrorView(frame: self.view.frame)
                         self.view.addSubview(popUpView)
                         UIView.animate(withDuration: 0.3) {
                             popUpView.titleLabel.text = "Lỗi Đăng Nhập"
-                            popUpView.messageLabel.text = "Thông tin Email hoặc Mật khẩu không chính xác.Vui lòng thử lại"
+                            popUpView.messageLabel.text = "Thông tin Email hoặc Mật khẩu không chính xác. Vui lòng thử lại."
                             popUpView.contentView.alpha = 1
                             popUpView.blurView.alpha = 0.25
                             popUpView.contentView.transform = .identity
                         }
                     }
                     self.errorCount += 1
-                    print("[HL-LOG] Error - ", error.localizedDescription)
+                    print("[HL-LOG] Đăng nhập thất bại: \(error.localizedDescription)")
                 } else {
-                    // Handle maximum error count
-                    // You can uncomment and add your code here if necessary
+                    print("[HL-LOG] Vượt quá số lần thử")
                 }
             } else {
                 guard let phoneAccountInfo = self.phoneNumberTF.text else { return }
                 UDHelper.phoneUser = phoneAccountInfo
-                FirestoreDatabaseManager.shared.getDocumentByID(collectionName: "usernew", documentID: "\(UUID().uuidString)") { document, error in
+
+                guard let uid = Auth.auth().currentUser?.uid else { return }
+
+                FirestoreDatabaseManager.shared.getDocumentByID(collectionName: "usernew", documentID: uid) { document, error in
                     if let error = error {
-                        // Handle error
-                        print("Error: \(error)")
+                        print("[HL-LOG] Lỗi lấy dữ liệu người dùng: \(error.localizedDescription)")
                     } else if let document = document {
-                        // Document exists
+                        print("[HL-LOG] Tìm thấy document với ID: \(document.documentID)")
+
                         DispatchQueue.main.async {
                             let popUpView = PopUpSuccesssSignInVC(frame: self.view.frame)
                             self.view.addSubview(popUpView)
-                            UIView.animate(withDuration: 0.3) {
+
+                            UIView.animate(withDuration: 0.3, animations: {
                                 popUpView.contentView.alpha = 1
                                 popUpView.blurView.alpha = 0.25
                                 popUpView.contentView.transform = .identity
+                            }) { _ in
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    guard self.view.window != nil else {
+                                        print("[HL-LOG] ViewController đã bị hủy.")
+                                        return
+                                    }
+
+                                    if let nav = self.navigationController,
+                                       nav.topViewController === self {
+                                        self.push(TabbarCustomController())
+                                        UDHelper.isLoginSuccess = true
+                                        print("[HL-LOG] Chuyển sang màn hình chính - login success")
+                                    } else {
+                                        print("[HL-LOG] Không thể push - không ở top view controller")
+                                    }
+                                }
                             }
                         }
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                            #warning("need check")
-                            self.push(TabbarCustomController())
-                            UDHelper.isLoginSuccess = true
-                            print("login success")
-                        }
                     } else {
-                        // Document does not exist
-                        print("Document does not exist")
+                        print("[HL-LOG] Không tìm thấy document cho UID: \(uid)")
                     }
                 }
             }

@@ -6,8 +6,11 @@
 //
 
 import UIKit
-import FirebaseCore
-import FirebaseAuth
+//import FirebaseCore
+//import FirebaseAuth
+//import FirebaseFirestoreInternal
+import Firebase
+
 
 class RegisterVC: BaseViewController {
 
@@ -70,7 +73,7 @@ class RegisterVC: BaseViewController {
     
     private func signIn() {
         if isValidPassword(passwordAccount, confirmation: confirmPasswordAccount) {
-                    Auth.auth().createUser(withEmail: emailAccount, password: passwordAccount) { _, error in
+                    Auth.auth().createUser(withEmail: emailAccount, password: passwordAccount) { result, error in
                         if let error = error {
                             // View Error
                             DispatchQueue.main.async {
@@ -85,7 +88,9 @@ class RegisterVC: BaseViewController {
                                 }
                             }
                             print("[HL-LOG] Error - ", error.localizedDescription)
-                        } else {
+                        } else if let user = result?.user {
+                            let uid = user.uid
+                            
                             DispatchQueue.main.async {
                                 let popUpView = PopUpSuccessSignUpView(frame: self.view.frame)
                                 self.view.addSubview(popUpView)

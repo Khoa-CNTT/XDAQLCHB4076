@@ -62,8 +62,8 @@
             filePath = "MilkShopProject/ViewControllers/RegisterVC/RegisterVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "handleDataTextField()"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,9 +78,9 @@
             filePath = "MilkShopProject/ViewControllers/RegisterVC/RegisterVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
-            landmarkName = "handleDataTextField()"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "signIn()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,41 +94,9 @@
             filePath = "MilkShopProject/ViewControllers/RegisterVC/RegisterVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "143"
+            endingLineNumber = "143"
             landmarkName = "textFieldDidEndEditing(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FBEB97A8-79A3-463B-9429-615D16F6B120"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MilkShopProject/ViewControllers/RegisterVC/RegisterVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "108"
-            endingLineNumber = "108"
-            landmarkName = "signIn()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "969AE9EA-B454-44AE-9A5C-66D261CF10C1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MilkShopProject/ViewControllers/LoginVC/LoginVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "login()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

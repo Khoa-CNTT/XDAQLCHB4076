@@ -14,6 +14,7 @@
                 <outlet property="loadingAnimationView" destination="E3Y-Xa-nF5" id="gZ4-Nd-95N"/>
                 <outlet property="productEmptyView" destination="K75-Ej-Ihg" id="Ddq-ot-8Qt"/>
                 <outlet property="productsInCartTableView" destination="WxO-8c-ohI" id="c0M-Hl-a9N"/>
+                <outlet property="selectedAllButton" destination="oVO-qa-0iW" id="6vB-WG-itI"/>
                 <outlet property="totalPriceProductLabel" destination="D8w-xH-fRz" id="1iZ-D8-apS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -47,18 +48,30 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oVO-qa-0iW">
+                                    <rect key="frame" x="353" y="56" width="24" height="24"/>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                    <state key="normal" image="ic_Tick"/>
+                                    <connections>
+                                        <action selector="didTapSelectedAllButton:" destination="-1" eventType="touchUpInside" id="RGd-DE-4i4"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.086274509799999996" green="0.2352941036" blue="0.4588235021" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <constraints>
                                 <constraint firstItem="2he-S4-0gt" firstAttribute="centerX" secondItem="Jca-hu-fcg" secondAttribute="centerX" id="9vD-WP-8io"/>
+                                <constraint firstAttribute="trailing" secondItem="oVO-qa-0iW" secondAttribute="trailing" constant="16" id="GzH-vb-dgf"/>
                                 <constraint firstAttribute="height" constant="100" id="I9L-72-xKv"/>
+                                <constraint firstItem="oVO-qa-0iW" firstAttribute="top" secondItem="2he-S4-0gt" secondAttribute="top" id="OBS-mz-XNs"/>
                                 <constraint firstItem="2he-S4-0gt" firstAttribute="centerY" secondItem="IQc-5R-Cu3" secondAttribute="centerY" id="Zph-Fa-b68"/>
+                                <constraint firstItem="oVO-qa-0iW" firstAttribute="bottom" secondItem="2he-S4-0gt" secondAttribute="bottom" id="cim-kQ-UEr"/>
                                 <constraint firstItem="IQc-5R-Cu3" firstAttribute="leading" secondItem="Jca-hu-fcg" secondAttribute="leading" constant="16" id="ihL-Ux-YkK"/>
                                 <constraint firstAttribute="bottom" secondItem="IQc-5R-Cu3" secondAttribute="bottom" constant="16" id="mUp-p7-RQC"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NzD-cD-n1w">
-                            <rect key="frame" x="0.0" y="672" width="393" height="100"/>
+                            <rect key="frame" x="0.0" y="752" width="393" height="100"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tổng Tiền:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JEX-EL-GEh">
                                     <rect key="frame" x="20" y="9.9999999999999982" width="83.333333333333329" height="20.333333333333329"/>
@@ -69,7 +82,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="813.000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8w-xH-fRz">
                                     <rect key="frame" x="19.999999999999993" y="35.333333333333371" width="96.333333333333314" height="28.666666666666671"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                    <color key="textColor" red="0.20000001789999999" green="0.20000001789999999" blue="0.20000001789999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9uS-SL-nRi">
@@ -81,9 +94,12 @@
                                     </constraints>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" title="THANH TOÁN">
+                                    <state key="normal" title="MUA HÀNG">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
+                                    <connections>
+                                        <action selector="didTapPurchaseButton:" destination="-1" eventType="touchUpInside" id="Tap-JR-6Wf"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -98,20 +114,20 @@
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="WxO-8c-ohI">
-                            <rect key="frame" x="0.0" y="100" width="393" height="572"/>
+                            <rect key="frame" x="0.0" y="100" width="393" height="652"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K75-Ej-Ihg">
-                            <rect key="frame" x="67" y="282" width="259" height="288.33333333333326"/>
+                            <rect key="frame" x="67" y="0.0" width="259" height="852"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chưa có sản phẩm trong giỏ hàng" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9h-XG-VmM">
-                                    <rect key="frame" x="0.0" y="264" width="259" height="16.333333333333314"/>
+                                    <rect key="frame" x="0.0" y="562" width="259" height="282"/>
                                     <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="14"/>
                                     <color key="textColor" red="0.0078431372550000003" green="0.074509803920000006" blue="0.69019607839999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_cart_isEmpty" translatesAutoresizingMaskIntoConstraints="NO" id="66r-K9-gwj">
-                                    <rect key="frame" x="1.6666666666666856" y="0.0" width="256" height="256"/>
+                                    <rect key="frame" x="1.6666666666666856" y="298" width="256" height="256"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="66r-K9-gwj" secondAttribute="height" id="2t1-0h-uwr"/>
                                     </constraints>
@@ -124,7 +140,7 @@
                                 <constraint firstAttribute="bottom" secondItem="z9h-XG-VmM" secondAttribute="bottom" constant="8" id="Hrh-9t-vWn"/>
                                 <constraint firstItem="66r-K9-gwj" firstAttribute="centerX" secondItem="K75-Ej-Ihg" secondAttribute="centerX" id="dPJ-ku-y7q"/>
                                 <constraint firstItem="z9h-XG-VmM" firstAttribute="top" secondItem="66r-K9-gwj" secondAttribute="bottom" constant="8" id="msy-fd-gAj"/>
-                                <constraint firstItem="66r-K9-gwj" firstAttribute="top" secondItem="K75-Ej-Ihg" secondAttribute="top" id="pt7-uf-1fo"/>
+                                <constraint firstItem="66r-K9-gwj" firstAttribute="centerY" secondItem="K75-Ej-Ihg" secondAttribute="centerY" id="vy5-1n-weW"/>
                             </constraints>
                         </view>
                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q1W-pG-Qcv">
@@ -137,6 +153,9 @@
                                         <constraint firstAttribute="width" constant="100" id="JcC-pS-3gh"/>
                                         <constraint firstAttribute="width" secondItem="E3Y-Xa-nF5" secondAttribute="height" id="jIh-eg-xUz"/>
                                     </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="loadingCart"/>
+                                    </userDefinedRuntimeAttributes>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -151,11 +170,12 @@
                         <constraint firstAttribute="trailing" secondItem="WxO-8c-ohI" secondAttribute="trailing" id="0NX-xG-LnP"/>
                         <constraint firstItem="Jca-hu-fcg" firstAttribute="leading" secondItem="t7A-8w-dr0" secondAttribute="leading" id="0QY-Gs-2OZ"/>
                         <constraint firstItem="NzD-cD-n1w" firstAttribute="top" secondItem="WxO-8c-ohI" secondAttribute="bottom" id="0dg-27-uas"/>
+                        <constraint firstItem="Q1W-pG-Qcv" firstAttribute="bottom" secondItem="K75-Ej-Ihg" secondAttribute="bottom" id="G5U-54-Ykb"/>
                         <constraint firstAttribute="trailing" secondItem="Jca-hu-fcg" secondAttribute="trailing" id="IGc-VF-M8d"/>
                         <constraint firstAttribute="trailing" secondItem="Q1W-pG-Qcv" secondAttribute="trailing" id="MD8-jR-Xav"/>
                         <constraint firstAttribute="bottom" secondItem="Q1W-pG-Qcv" secondAttribute="bottom" id="O95-ed-7dv"/>
                         <constraint firstItem="WxO-8c-ohI" firstAttribute="leading" secondItem="t7A-8w-dr0" secondAttribute="leading" id="Rnv-rA-ZJp"/>
-                        <constraint firstAttribute="bottom" secondItem="NzD-cD-n1w" secondAttribute="bottom" constant="80" id="TBu-RR-Sm8"/>
+                        <constraint firstAttribute="bottom" secondItem="NzD-cD-n1w" secondAttribute="bottom" id="TBu-RR-Sm8"/>
                         <constraint firstItem="K75-Ej-Ihg" firstAttribute="centerY" secondItem="t7A-8w-dr0" secondAttribute="centerY" id="Tzc-QM-b0N"/>
                         <constraint firstItem="Jca-hu-fcg" firstAttribute="top" secondItem="t7A-8w-dr0" secondAttribute="top" id="V62-Jz-2CU"/>
                         <constraint firstItem="Q1W-pG-Qcv" firstAttribute="leading" secondItem="t7A-8w-dr0" secondAttribute="leading" id="Vpm-xi-v0L"/>
@@ -164,6 +184,7 @@
                         <constraint firstItem="K75-Ej-Ihg" firstAttribute="centerX" secondItem="t7A-8w-dr0" secondAttribute="centerX" id="dKP-Fi-ASQ"/>
                         <constraint firstItem="WxO-8c-ohI" firstAttribute="top" secondItem="Jca-hu-fcg" secondAttribute="bottom" id="hhW-Af-Dd9"/>
                         <constraint firstAttribute="trailing" secondItem="NzD-cD-n1w" secondAttribute="trailing" id="kmh-zg-Ply"/>
+                        <constraint firstItem="Q1W-pG-Qcv" firstAttribute="top" secondItem="K75-Ej-Ihg" secondAttribute="top" id="kyv-Hg-BjI"/>
                         <constraint firstAttribute="trailing" secondItem="K75-Ej-Ihg" secondAttribute="trailing" constant="67" id="rIB-Fz-Fcd"/>
                         <constraint firstItem="Q1W-pG-Qcv" firstAttribute="top" secondItem="t7A-8w-dr0" secondAttribute="top" id="xtD-Dh-sHh"/>
                     </constraints>
@@ -182,6 +203,7 @@
     </objects>
     <resources>
         <image name="icBackDetail" width="90" height="90"/>
+        <image name="ic_Tick" width="24" height="24"/>
         <image name="img_cart_isEmpty" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

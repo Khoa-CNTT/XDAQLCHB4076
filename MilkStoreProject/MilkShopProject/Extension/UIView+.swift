@@ -589,3 +589,17 @@ extension UIView {
         return nil
     }
 }
+
+extension UIView {
+    func currentFirstResponder() -> UIResponder? {
+        if self.isFirstResponder {
+            return self
+        }
+        for subview in self.subviews {
+            if let responder = subview.currentFirstResponder() {
+                return responder
+            }
+        }
+        return nil
+    }
+}

@@ -67,6 +67,11 @@ class HomeVC: BaseViewController {
         }
     }
     
+    @IBAction func didTapCartButton(_ sender: Any) {
+        let vc = CartVC()
+        self.push(vc)
+    }
+    
     //MARK: Method
     private func handleSetupCollectionView() {
         setUpCollectionView(homeClsView, OnboardClsCell.self)
@@ -86,18 +91,6 @@ class HomeVC: BaseViewController {
             ]
         
         horizontalPagingCollections.forEach {  setupHorizontalPagingLayout(for:  $0 )}
-        
-//        if let layout = freshMilkClsView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            layout.scrollDirection = .horizontal
-//            layout.minimumLineSpacing = 0
-//            layout.minimumInteritemSpacing = 0
-//            
-//            layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//            
-//            freshMilkClsView.isPagingEnabled = true
-//            freshMilkClsView.decelerationRate = .fast
-//            freshMilkClsView.showsHorizontalScrollIndicator = false
-//        }
     }
     
     private func setupHorizontalPagingLayout(for collectionView: UICollectionView) {

@@ -20,9 +20,14 @@ class FirestoreDatabaseManager {
     // Account Info
 
     func writeAccountInfoDataToFirestore(account_info: AccountInfoModel) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("Không lấy được UID")
+            return
+        }
+        
         print("[HL-LOG] Đang cố gắng ghi vào Firestore với dữ liệu: \(account_info)")
         let db = Firestore.firestore()
-        let accountInfoRef = db.collection("usernew").document("\(UUID().uuidString)")
+        let accountInfoRef = db.collection("usernew").document(uid)
 
         accountInfoRef.setData(account_info.dictionary) { error in
             if let error = error {

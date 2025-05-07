@@ -14,4 +14,5 @@ struct CartModel {
     var imageProduct: String
     var price: String
     var quantity: Int
+    var isSelected: Bool = false
 }

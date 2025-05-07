@@ -159,6 +159,25 @@ extension UIViewController {
         }
     }
     
+    func openBottomSheet(vc: UIViewController, ratioView height: CGFloat = 0.5, lineGrabber: Bool = false, corner: CGFloat = 10){
+        vc.modalPresentationStyle = .pageSheet
+        if #available(iOS 15.0, *) {
+            if let sheet = vc.sheetPresentationController {
+                sheet.prefersGrabberVisible = lineGrabber
+                sheet.preferredCornerRadius = corner
+                if #available(iOS 16.0, *) {
+                    sheet.detents = [.custom(resolver: { context in
+                        height * context.maximumDetentValue
+                    })]
+                } else {
+                    sheet.detents = [.medium()]
+                }
+            }
+        } else {}
+
+        self.present(vc, animated: true, completion: nil)
+    }
+    
      func checkCameraAccess() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .denied:

@@ -145,4 +145,87 @@ func getMilksFromRealm() -> [DataMilk] {
         print("❌ Lỗi khi đọc dữ liệu từ Realm: \(error)")
         return []
     }
+}
+
+// Realm wrapper cho Address
+class RealmAddress: Object {
+    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted var name: String = ""
+    @Persisted var phone: String = ""
+    @Persisted var address: String = ""
+    @Persisted var isDefault: Bool = false
+    
+    convenience init(from address: Address) {
+        self.init()
+        self.id = address.id
+        self.name = address.name
+        self.phone = address.phone
+        self.address = address.address
+        self.isDefault = address.isDefault
+    }
+    
+    func toAddress() -> Address {
+        return Address(
+            id: id,
+            name: name,
+            phone: phone,
+            address: address,
+            isDefault: isDefault
+        )
+    }
+}
+
+// Helper functions để lưu và đọc địa chỉ từ Realm
+func saveAddressToRealm(_ address: Address) {
+    do {
+        let realm = try Realm()
+        try realm.write {
+            let realmAddress = RealmAddress(from: address)
+            realm.add(realmAddress, update: .modified)
+        }
+    } catch {
+        print("❌ Lỗi khi lưu địa chỉ vào Realm: \(error)")
+    }
+}
+
+func getAddressesFromRealm() -> [Address] {
+    do {
+        let realm = try Realm()
+        let realmAddresses = realm.objects(RealmAddress.self)
+        return realmAddresses.map { $0.toAddress() }
+    } catch {
+        print("❌ Lỗi khi đọc địa chỉ từ Realm: \(error)")
+        return []
+    }
+}
+
+func deleteAddressFromRealm(id: String) {
+    do {
+        let realm = try Realm()
+        if let address = realm.object(ofType: RealmAddress.self, forPrimaryKey: id) {
+            try realm.write {
+                realm.delete(address)
+            }
+        }
+    } catch {
+        print("❌ Lỗi khi xóa địa chỉ từ Realm: \(error)")
+    }
+}
+
+func updateDefaultAddress(id: String) {
+    do {
+        let realm = try Realm()
+        try realm.write {
+            // Reset tất cả địa chỉ về false
+            let allAddresses = realm.objects(RealmAddress.self)
+            allAddresses.forEach { $0.isDefault = false }
+            
+            // Set địa chỉ được chọn thành default
+            if let address = realm.object(ofType: RealmAddress.self, forPrimaryKey: id) {
+                address.isDefault = true
+            }
+        }
+    } catch {
+        print("❌ Lỗi khi cập nhật địa chỉ mặc định: \(error)")
+    }
 } 

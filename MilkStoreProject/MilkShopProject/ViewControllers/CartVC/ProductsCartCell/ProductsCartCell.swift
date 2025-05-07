@@ -13,6 +13,7 @@ protocol ProductCartCellDelegate: AnyObject {
     func didTapMinusProduct(indexPath: IndexPath)
     func didTapPlusProduct(indexPath: IndexPath)
     func didTapChangeQuantity(indexPath: IndexPath, newQuantity: Int)
+    func didTapSelectedProduct(indexPath: IndexPath)
 }
 
 class ProductsCartCell: UITableViewCell {
@@ -22,6 +23,7 @@ class ProductsCartCell: UITableViewCell {
     @IBOutlet weak var nameProductLabel: UILabel!
     @IBOutlet weak var productCartImageView: UIImageView!
     
+    @IBOutlet weak var selectedProductButton: UIButton!
     weak var delegate: ProductCartCellDelegate?
     var indexPath: IndexPath?
     
@@ -50,6 +52,12 @@ class ProductsCartCell: UITableViewCell {
         }
     }
 
+    @IBAction func didTapSelectedProductButton(_ sender: Any) {
+        if let indexPath = self.indexPath {
+            self.delegate?.didTapSelectedProduct(indexPath: indexPath)
+        }
+    }
+    
     func configCell(items: CartModel) {
         self.countProductTF.text = "\(items.quantity)"
         self.nameProductLabel.text = items.nameProduct
@@ -63,6 +71,9 @@ class ProductsCartCell: UITableViewCell {
                 .transition(.fade(0.3))
             ]
         )
+        
+        let iconSelected = items.isSelected ? UIImage(named: "ic_Tick")?.withTintColor(.black) : UIImage(named: "ic_Untick")?.withTintColor(.black)
+        self.selectedProductButton.setImage(iconSelected, for: .normal)
     }
     
     

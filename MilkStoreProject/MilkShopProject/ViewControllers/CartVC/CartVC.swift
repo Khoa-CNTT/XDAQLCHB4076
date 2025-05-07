@@ -11,6 +11,7 @@ import FirebaseAuth
 
 class CartVC: BaseViewController {
     
+    @IBOutlet weak var selectedAllButton: UIButton!
     @IBOutlet weak var loadingAnimationView: LottieAnimationView!
     @IBOutlet weak var containerLoadingView: UIView!
     @IBOutlet weak var productEmptyView: UIView!
@@ -18,6 +19,7 @@ class CartVC: BaseViewController {
     @IBOutlet weak var productsInCartTableView: UITableView!
     
     private var cartItems: [CartModel] = []
+    private var totalPrice = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,13 +83,46 @@ class CartVC: BaseViewController {
                                               price: price,
                                               quantity: quantity)
                     self.cartItems.append(cartModel)
+                    self.productsInCartTableView.reloadData()
                 }
             }
             
             group.notify(queue: .main) {
                 self.updateUIAfterFetch()
+                self.updateTotalPrice()
             }
         }
+    }
+    
+    @IBAction func didTapSelectedAllButton(_ sender: Any) {
+        let allSelected = cartItems.allSatisfy { $0.isSelected }
+        
+        cartItems = cartItems.map { item in
+            var newItem = item
+            newItem.isSelected = !allSelected
+            return newItem
+        }
+            
+        productsInCartTableView.reloadData()
+        updateTotalPrice()
+        updateSelectedAllButton()
+    }
+    
+    @IBAction func didTapPurchaseButton(_ sender: Any) {
+        guard cartItems.filter({ $0.isSelected }).isEmpty == false else {
+            showAlert(title: "Error", message: "Bạn vẫn chưa chọn sản phẩm nào để mua.")
+            return
+        }
+        
+        let vc = OrderVC()
+        vc.selectedCartItems = cartItems.filter { $0.isSelected }
+        self.push(vc)
+    }
+    
+    private func updateSelectedAllButton() {
+        let allSelected = cartItems.allSatisfy { $0.isSelected }
+        let imageSelected = UIImage(named: allSelected ? "ic_Tick" : "ic_Untick")?.withTintColor(.white)
+        self.selectedAllButton.setImage(imageSelected, for: .normal)
     }
     
     private func updateUIAfterFetch() {
@@ -97,13 +132,13 @@ class CartVC: BaseViewController {
             self.productEmptyView.isHidden = hasItems
             self.productsInCartTableView.isHidden = !hasItems
             self.productsInCartTableView.reloadData()
-            self.updateTotalPrice()
         }
     }
     
     private func updateTotalPrice() {
+        let selectedItem = cartItems.filter { $0.isSelected }
         
-        let totalPrice = cartItems.reduce(0) { result, item in
+        let totalPrice = selectedItem.reduce(0) { result, item in
             let price = self.convertPriceToInt(item.price)
             return result + ((price?.double ?? 0.0) * Double(item.quantity))
         }
@@ -199,5 +234,12 @@ extension CartVC: ProductCartCellDelegate {
                 self.updateTotalPrice()
             }
         }
+    }
+    
+    func didTapSelectedProduct(indexPath: IndexPath) {
+        cartItems[indexPath.row].isSelected.toggle()
+        self.productsInCartTableView.reloadRows(at: [indexPath], with: .none)
+        self.updateTotalPrice()
+        self.updateSelectedAllButton()
     }
 }

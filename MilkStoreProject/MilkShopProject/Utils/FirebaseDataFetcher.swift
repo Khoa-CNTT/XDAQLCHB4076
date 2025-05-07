@@ -1,4 +1,5 @@
 import Foundation
+import FirebaseAuth
 import FirebaseFirestore
 
 class FirebaseDataFetcher {
@@ -63,5 +64,38 @@ class FirebaseDataFetcher {
                     completion(nil)
                 }
             }
+    }
+    
+    func updateUserAddress(uid: String, newAddress: String, completion: ((Error?) -> Void)? = nil) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("usernew").document(uid)
+        
+        userRef.updateData([
+            "address": FieldValue.arrayUnion([newAddress])
+        ]) { error in
+            if let error = error {
+                print("[HL-LOG] Update address error: \(error.localizedDescription)")
+            } else {
+                print("[HL-LOG] Address updated successfully.")
+            }
+            completion?(error)
+        }
+    }
+    
+    func fetchUserAddresses(uid: String, completion: @escaping ([String]?, Error?) -> Void) {
+        let db = Firestore.firestore()
+        let userRef = db.collection("usernew").document(uid)
+        
+        userRef.getDocument { document, error in
+            if let document = document, document.exists {
+                if let addressArray = document.data()?["address"] as? [String] {
+                    completion(addressArray, nil)
+                } else {
+                    completion([], nil)
+                }
+            } else {
+                completion(nil, error)
+            }
+        }
     }
 }

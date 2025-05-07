@@ -8219,40 +8219,32 @@
             "Phường Hòa Hiệp Nam",
             "Phường Hòa Khánh Bắc",
             "Phường Hòa Khánh Nam",
-            "Phường Hòa Minh",
-            "Phường Tam Thuận",
-            "Phường Thanh Khê Tây",
-            "Phường Thanh Khê Đông",
-            "Phường Xuân Hà",
-            "Phường Tân Chính",
-            "Phường Chính Gián",
-            "Phường Vĩnh Trung",
-            "Phường Thạc Gián",
-            "Phường An Khê",
-            "Phường Hòa Khê"
+            "Phường Hòa Minh"
           ]
         },
         {
           "QuanHuyen": "Quận Thanh Khê",
           "PhuongXaDS": [
-            "Phường Thanh Bình",
-            "Phường Thuận Phước",
-            "Phường Thạch Thang",
-            "Phường Hải Châu  I",
-            "Phường Hải Châu II",
-            "Phường Phước Ninh",
-            "Phường Hòa Thuận Tây",
-            "Phường Hòa Thuận Đông",
-            "Phường Nam Dương",
-            "Phường Bình Hiên",
-            "Phường Bình Thuận",
-            "Phường Hòa Cường Bắc",
-            "Phường Hòa Cường Nam"
+            "Phường An Khê",
+            "Phường Chính Gián",
+            "Phường Thạc Gián",
+            "Phường Thanh Khê Đông",
+            "Phường Thanh Khê Tây",
+            "Phường Xuân Hà"
           ]
-
         },
         {
           "QuanHuyen": "Quận Hải Châu",
+          "PhuongXaDS": [
+            "Phường Hải Châu",
+            "Phường Hòa Cường",
+            "Phường Nam Dương",
+            "Phường Hòa Thuận Đông",
+            "Phường Bình Hiên"
+          ]
+        },
+        {
+          "QuanHuyen": "Quận Sơn Trà",
           "PhuongXaDS": [
             "Phường Thọ Quang",
             "Phường Nại Hiên Đông",
@@ -8264,29 +8256,20 @@
           ]
         },
         {
-          "QuanHuyen": "Quận Sơn Trà",
-          "PhuongXaDS": [
-            "Phường Mỹ An",
-            "Phường Khuê Mỹ",
-            "Phường Hoà Quý",
-            "Phường Hoà Hải"
-          ]
-        },
-        {
           "QuanHuyen": "Quận Ngũ Hành Sơn",
           "PhuongXaDS": [
             "Phường Mỹ An",
             "Phường Khuê Mỹ",
-            "Phường Hoà Quý",
-            "Phường Hoà Hải"
+            "Phường Hòa Quý",
+            "Phường Hòa Hải"
           ]
         },
         {
           "QuanHuyen": "Quận Cẩm Lệ",
           "PhuongXaDS": [
             "Phường Khuê Trung",
-            "Phường Hòa Phát",
             "Phường Hòa An",
+            "Phường Hòa Phát",
             "Phường Hòa Thọ Tây",
             "Phường Hòa Thọ Đông",
             "Phường Hòa Xuân"
@@ -8306,6 +8289,12 @@
             "Xã Hòa Tiến",
             "Xã Hòa Phước",
             "Xã Hòa Khương"
+          ]
+        },
+        {
+          "QuanHuyen": "Huyện Hoàng Sa",
+          "PhuongXaDS": [
+            "Đặc khu Hoàng Sa"
           ]
         }
       ]
