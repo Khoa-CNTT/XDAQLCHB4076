@@ -100,4 +100,5 @@ public enum UDKey<T>: String, UD {
     case passWord = "passWord"
     case authenCode = "authenCode"
     case isLoginSuccess = "isLoginSuccess"
+    case isFirstFetchDataInSplash = "isFirstFetchDataInSplash"
 }

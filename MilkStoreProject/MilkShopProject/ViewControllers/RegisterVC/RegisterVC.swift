@@ -105,7 +105,7 @@ class RegisterVC: BaseViewController {
                             let accountInfoData = AccountInfoModel(email: self.emailAccount, phone: self.phoneAccount, username: self.nameAccount, role: "false", address: [], password: self.passwordAccount, authcode: self.authen)
                             UDHelper.nameUser = self.nameAccount
                             UDHelper.phoneUser = self.phoneAccount
-                            UDHelper.roleUser = self.role
+//                            UDHelper.roleUser = self.role
                             UDHelper.address = self.address
                             UDHelper.passWord = self.passwordAccount
                             UDHelper.authenCode = self.authen

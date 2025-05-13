@@ -72,6 +72,12 @@ class HomeVC: BaseViewController {
         self.push(vc)
     }
     
+    @IBAction func didTapSearchButton(_ sender: Any) {
+        let vc = SearchProductVC()
+        let nav = UINavigationController(rootViewController: vc)
+        self.present(vc: nav)
+    }
+    
     //MARK: Method
     private func handleSetupCollectionView() {
         setUpCollectionView(homeClsView, OnboardClsCell.self)
@@ -109,6 +115,7 @@ class HomeVC: BaseViewController {
     private func fetchDataFromRealm() {
         let dataMilkObject = RealmManager.shared.getAll(for: DataMilkObject.self)
         
+        print("count: \(dataMilkObject.count)")
         freshMilkData = dataMilkObject.filter { $0.type == "Sữa tươi" }
         promotionMilkData = dataMilkObject.filter { $0.type == "Sản phẩm khuyến mại" }
         creamData = dataMilkObject.filter { $0.type == "Kem" }
@@ -220,7 +227,6 @@ extension HomeVC: UICollectionViewDelegate,UICollectionViewDataSource,UICollecti
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         pageControl.currentPage = currentPage
-        let width = scrollView.frame.width
         currentPage = Int(scrollView.contentOffset.x)
     }
     

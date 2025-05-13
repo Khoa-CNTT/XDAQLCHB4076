@@ -74,10 +74,6 @@ class AddAddressVC: BaseViewController {
         }
     }
     
-    @IBAction func didTapBackButton(_ sender: Any) {
-        self.dismiss()
-    }
-    
     @IBAction func didTapSelectProvince(_ sender: Any) {
         let vc = ProvinceBottomSheetVC()
         vc.items = allProvinces.map { $0.name }
@@ -178,7 +174,12 @@ class AddAddressVC: BaseViewController {
             FirebaseDataFetcher().updateUserAddress(uid: uid, newAddress: newAddress)
         }
         
-        self.dismiss()
+        self.showToast(message: "Địa chỉ đã được cập nhật thành công.")
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.dismiss()
+        }
+        
     }
     
     @IBAction func didTapSelectWard(_ sender: Any) {
@@ -197,6 +198,9 @@ class AddAddressVC: BaseViewController {
         }
         self.openBottomSheet(vc: vc, ratioView: 0.5, corner: 32)
     }
+    @IBAction func didTapBackButton(_ sender: Any) {
+        self.dismiss()
+    }
 }
 
 extension AddAddressVC {
@@ -207,27 +211,23 @@ extension AddAddressVC {
     
     @objc func keyboardWillShow(notification: NSNotification) {
         guard let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else { return }
-        let keyboardHeight = keyboardFrame.height
-
-        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
-
+        
+        let keyboardTopY = self.view.frame.height - keyboardFrame.height
         if let activeField = self.view.currentFirstResponder() as? UIView {
-            var visibleRect = self.view.frame
-            visibleRect.size.height -= keyboardHeight
-
             let fieldFrame = activeField.convert(activeField.bounds, to: self.view)
-            if !visibleRect.contains(fieldFrame.origin) {
-                scrollView.scrollRectToVisible(fieldFrame, animated: true)
+            let fieldBottomY = fieldFrame.origin.y + fieldFrame.height
+            
+            if fieldBottomY > keyboardTopY {
+                let overlap = fieldBottomY - keyboardTopY + 20 
+                self.view.frame.origin.y = CGFloat(-overlap)
             }
         }
     }
     
     @objc func keyboardWillHide(notification: NSNotification) {
-        let contentInsets = UIEdgeInsets.zero
-        scrollView.contentInset = contentInsets
-        scrollView.scrollIndicatorInsets = contentInsets
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
     }
     
     func hideKeyboardWhenTappedAround() {
@@ -255,35 +255,29 @@ extension AddAddressVC {
 extension AddAddressVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        switch textField {
-        case addressTF:
-            if let text = self.addressTF.text {
-                if text.isEmpty {
-                    showError(label: addressErrorLabel, message: "Vui lòng điền Địa chỉ", view: addressView)
-                } else {
-                    hideError(label: addressErrorLabel, view: addressView)
-                }
+        if let text = self.addressTF.text {
+            if text.isEmpty {
+                showError(label: addressErrorLabel, message: "Vui lòng điền Địa chỉ", view: addressView)
+            } else {
+                hideError(label: addressErrorLabel, view: addressView)
             }
-        case nameUserTF:
-            if let text = self.nameUserTF.text {
-                if text.isEmpty {
-                    showError(label: nameUserErrorLabel, message: "Vui lòng điền Họ và tên đệm", view: nameUserView)
-                } else {
-                    hideError(label: nameUserErrorLabel, view: nameUserView)
-                }
-            }
-        case phoneNumberTF:
-            if let text = self.phoneNumberTF.text {
-                if text.isEmpty {
-                    showError(label: phoneUserErrorLabel, message: "Vui lòng điền Họ và tên đệm", view: phoneNumberView)
-                } else {
-                    hideError(label: phoneUserErrorLabel, view: phoneNumberView)
-                }
-            }
-        default:
-            break
         }
         
+        if let text = self.nameUserTF.text {
+            if text.isEmpty {
+                showError(label: nameUserErrorLabel, message: "Vui lòng điền Họ và tên đệm", view: nameUserView)
+            } else {
+                hideError(label: nameUserErrorLabel, view: nameUserView)
+            }
+        }
+        
+        if let text = self.phoneNumberTF.text {
+            if text.isEmpty {
+                showError(label: phoneUserErrorLabel, message: "Vui lòng điền Họ và tên đệm", view: phoneNumberView)
+            } else {
+                hideError(label: phoneUserErrorLabel, view: phoneNumberView)
+            }
+        }
         return true
     }
 }

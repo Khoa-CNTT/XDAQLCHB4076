@@ -12,8 +12,8 @@ class TabbarCustomController: UITabBarController {
     var customTabBar: CustomTabbar!
     var tabBarHeight = 80.0
     private var homeVC = HomeVC()
-    private var cartVC = CartVC()
-    private var settingVC = SettingVC()
+    private var cartVC = NotificationUserVC()
+    private var settingVC = AccountVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,9 +32,7 @@ class TabbarCustomController: UITabBarController {
     func setupCustomTabMenu() {
         var frame = tabBar.frame
         frame.size.height = 80
-        // Ẩn tab bar mặc định của hệ thống đi
         tabBar.isHidden = true
-        // Khởi tạo custom tab bar
         customTabBar = CustomTabbar(frame: frame , idx: selectedIndex)
         customTabBar.translatesAutoresizingMaskIntoConstraints = false
         customTabBar.clipsToBounds = true
@@ -43,7 +41,6 @@ class TabbarCustomController: UITabBarController {
         view.addSubview(customTabBar)
         view.backgroundColor = .white
         
-        // Auto layout cho custom tab bar
         NSLayoutConstraint.activate([
             customTabBar.leadingAnchor.constraint(equalTo: tabBar.leadingAnchor,constant: 0),
             customTabBar.trailingAnchor.constraint(equalTo: tabBar.trailingAnchor,constant: 0),

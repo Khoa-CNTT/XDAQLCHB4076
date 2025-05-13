@@ -15,25 +15,26 @@ class SplashVC: BaseViewController {
     
     @IBOutlet weak var loadingAnimationView: LottieAnimationView!
     
-    let fetcher = FirebaseDataFetcher()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.fetchData()
+        if isFirstLaunch() {
+            self.fetchData()
+        } else {
+            moveToNextScreen()
+        }
+        
         self.configureAnimation(loadingAnimationView, "loadingSplash", isPlay: true)
 //        let uploader = FirebaseUploader()
 //        uploader.readAndUploadProducts(from: "Milk Data")
     }
     
     private func fetchData() {
-        fetcher.fetchAllMilks { milks, error in
+        FirebaseDataFetcher.shared.fetchAllMilks { milks, error in
             if let error = error {
                 print("Lỗi khi fetch dữ liệu: \(error.localizedDescription)")
                 return
             }
-            
-            
             guard let milks = milks else {
                 print("Lỗi hoặc không có dữ liệu")
                 return
@@ -41,7 +42,6 @@ class SplashVC: BaseViewController {
             
             let dataMilks = milks.dataMilk ?? []
             let dataMilkObject = dataMilks.map {  self.convertToDataMilkObject(from: $0) }
-            
             RealmManager.shared.addMilkObj(object: dataMilkObject)
             self.moveToNextScreen()
         }
@@ -54,9 +54,25 @@ class SplashVC: BaseViewController {
         } else {
             nextVC = LoginVC()
         }
+
+        if !(nextVC is UINavigationController) {
+            AppDelegate.setRoot(nextVC, isNavi: true)
+        } else {
+            AppDelegate.setRoot(nextVC, isNavi: false)
+        }
         
-        AppDelegate.setRoot(nextVC, isNavi: true)
         self.loadingAnimationView.stop()
+    }
+    
+    private func isFirstLaunch() -> Bool {
+        let hasLaunchedBefore = UserDefaults.standard.bool(forKey: "hasLaunchedBefore")
+        
+        if hasLaunchedBefore {
+            return false
+        } else {
+            UserDefaults.standard.set(true, forKey: "hasLaunchedBefore")
+            return true
+        }
     }
     
     func convertToDataMilkObject(from dataMilk: DataMilk) -> DataMilkObject {

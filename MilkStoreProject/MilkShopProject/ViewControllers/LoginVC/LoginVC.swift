@@ -55,27 +55,6 @@ class LoginVC: BaseViewController {
         self.passwordTF.delegate = self
     }
     
-    private func signin(with credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { _, error in
-            guard error == nil else { return }
-            DispatchQueue.main.async {
-                let popUpView = PopUpSuccesssSignInVC(frame: self.view.frame)
-                self.view.addSubview(popUpView)
-                UIView.animate(withDuration: 0.3) {
-                    popUpView.contentView.alpha = 1
-                    popUpView.blurView.alpha = 0.25
-                    popUpView.contentView.transform = .identity
-                }
-            }
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-                self?.push(TabbarCustomController())
-                #warning("need check")
-                print("Push Tabbar")
-            }
-        }
-    }
-    
     func handleDataTextField() {
         if phoneAccount.isValidEmail && passwordAccount.isEmpty == false {
             loginButton.isEnabled = true
@@ -149,6 +128,15 @@ extension LoginVC {
                     } else if let document = document {
                         print("[HL-LOG] Tìm thấy document với ID: \(document.documentID)")
 
+                        if let roleString = document.data()?["role"] as? String {
+                            let role = (roleString.lowercased() == "true")
+                            print("[HL-LOG] Role of user: \(role ? "Admin" : "User")")
+                            UDHelper.roleUser = role
+                        } else {
+                            let role = document.data()?["role"] as? Bool ?? false
+                            print("[HL-LOG] Role of user: \(role ? "Admin" : "User")")
+                        }
+                        
                         DispatchQueue.main.async {
                             let popUpView = PopUpSuccesssSignInVC(frame: self.view.frame)
                             self.view.addSubview(popUpView)
@@ -166,7 +154,7 @@ extension LoginVC {
 
                                     if let nav = self.navigationController,
                                        nav.topViewController === self {
-                                        self.push(TabbarCustomController())
+                                        AppDelegate.setRoot(TabbarCustomController(), isNavi: true)
                                         UDHelper.isLoginSuccess = true
                                         print("[HL-LOG] Chuyển sang màn hình chính - login success")
                                     } else {

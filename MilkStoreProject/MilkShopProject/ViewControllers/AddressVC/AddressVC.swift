@@ -23,6 +23,12 @@ class AddressVC: BaseViewController {
         super.viewDidLoad()
         
         setUpTableView(addressTableView, AddressCell.self)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         fetchAddress()
     }
     
@@ -32,7 +38,7 @@ class AddressVC: BaseViewController {
     
     private func fetchAddress() {
         if let uid = Auth.auth().currentUser?.uid {
-            FirebaseDataFetcher().fetchUserAddresses(uid: uid) { addresses, error in
+            FirebaseDataFetcher.shared.fetchUserAddresses(uid: uid) { addresses, error in
                 if let addresses = addresses {
                     self.addresses = addresses
                     self.addressTableView.reloadData()
@@ -80,4 +86,25 @@ extension AddressVC: UITableViewDataSource, UITableViewDelegate {
         let isLastRow = indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
         return isLastRow ? 66 : UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.row == 1 {
+            return nil
+        }
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "") { (action, view, completionHandler) in
+            self.addresses.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+            completionHandler(true)
+        }
+        
+        deleteAction.image = UIImage(systemName: "trash")
+        deleteAction.backgroundColor = UIColor(hexString: "#F2F2F2")
+        deleteAction.image = deleteAction.image?.withTintColor(.red, renderingMode: .alwaysOriginal)
+
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteAction])
+        
+        return swipeActions
+    }
 }
+

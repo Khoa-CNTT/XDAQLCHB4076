@@ -10,8 +10,27 @@
     <key>LSApplicationQueriesSchemes</key>
     <array>
         <string>zalo</string>
-        <string>zalopay</string>
-        <string>zalopay.guide.v2</string>
+        <string>Zalopay</string>
+        <string>Zalopay.api.v2</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLName</key>
+                <string>CFBundleURLSchemes</string>
+            </dict>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLName</key>
+                <string>org.reactjs.native.example.demozpdk</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>demozpdk</string>
+                </array>
+            </dict>
     </array>
 </dict>
 </plist>

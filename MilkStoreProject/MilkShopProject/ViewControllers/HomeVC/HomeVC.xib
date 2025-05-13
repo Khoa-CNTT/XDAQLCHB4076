@@ -62,17 +62,28 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySb-E8-hpO">
+                                            <rect key="frame" x="0.0" y="0.0" width="285" height="37"/>
+                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                            <connections>
+                                                <action selector="didTapSearchButton:" destination="-1" eventType="touchUpInside" id="peI-N4-c8G"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="37" id="4lB-AY-Oau"/>
                                         <constraint firstItem="1Ea-6G-RHI" firstAttribute="top" secondItem="3BG-gY-Wcp" secondAttribute="top" constant="6" id="5y0-JO-SbP"/>
                                         <constraint firstAttribute="trailing" secondItem="o2F-LJ-AIR" secondAttribute="trailing" constant="15" id="9Te-Ic-HVK"/>
+                                        <constraint firstAttribute="bottom" secondItem="ySb-E8-hpO" secondAttribute="bottom" id="Het-3R-3zx"/>
                                         <constraint firstItem="1Ea-6G-RHI" firstAttribute="leading" secondItem="3BG-gY-Wcp" secondAttribute="leading" constant="15" id="QIZ-Bz-se9"/>
                                         <constraint firstAttribute="bottom" secondItem="o2F-LJ-AIR" secondAttribute="bottom" id="Sbo-Nj-PLY"/>
+                                        <constraint firstItem="ySb-E8-hpO" firstAttribute="leading" secondItem="3BG-gY-Wcp" secondAttribute="leading" id="pEb-tU-FuC"/>
                                         <constraint firstItem="o2F-LJ-AIR" firstAttribute="leading" secondItem="1Ea-6G-RHI" secondAttribute="trailing" constant="8" id="pZ8-9a-ArM"/>
                                         <constraint firstAttribute="bottom" secondItem="1Ea-6G-RHI" secondAttribute="bottom" constant="6" id="sb3-d7-gpr"/>
+                                        <constraint firstItem="ySb-E8-hpO" firstAttribute="top" secondItem="3BG-gY-Wcp" secondAttribute="top" id="vXL-Ib-rlL"/>
                                         <constraint firstItem="o2F-LJ-AIR" firstAttribute="top" secondItem="3BG-gY-Wcp" secondAttribute="top" id="xJL-f7-A3e"/>
+                                        <constraint firstAttribute="trailing" secondItem="ySb-E8-hpO" secondAttribute="trailing" id="zJb-eR-0OQ"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layerCornerRadius">

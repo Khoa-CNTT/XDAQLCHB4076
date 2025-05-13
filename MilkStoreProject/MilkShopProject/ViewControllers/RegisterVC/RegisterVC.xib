@@ -67,6 +67,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icUser" translatesAutoresizingMaskIntoConstraints="NO" id="r2L-aF-rxE">
                                                     <rect key="frame" x="16" y="15" width="20" height="20"/>
+                                                    <color key="tintColor" red="0.7061191201" green="0.7061191201" blue="0.7061191201" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="r2L-aF-rxE" secondAttribute="height" id="ajr-vB-is5"/>
                                                     </constraints>

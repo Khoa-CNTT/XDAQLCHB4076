@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class CartService {
     
-    static let share = CartService()
+    static let shared = CartService()
     
     private let db = Firestore.firestore()
     private var cartRef: CollectionReference {
@@ -91,6 +91,28 @@ class CartService {
     func fetchCartItems(for userId: String, completion: @escaping ([QueryDocumentSnapshot]?, Error?) -> Void) {
         cartRef.whereField("iduser", isEqualTo: userId).getDocuments { snapshot, error in
             completion(snapshot?.documents, error)
+        }
+    }
+    
+    func removeAllItemsInCart(for userId: String, completion: @escaping (Error?) -> Void) {
+        let cartRef = Firestore.firestore().collection("cart")
+        cartRef.whereField("iduser", isEqualTo: userId).getDocuments { snapshot, error in
+            if let error = error {
+                completion(error)
+                return
+            }
+            
+            snapshot?.documents.forEach { document in
+                document.reference.delete() { error in
+                    if let error = error {
+                        print("Error deleting cart item: \(error.localizedDescription)")
+                    } else {
+                        print("Cart item deleted successfully")
+                    }
+                }
+            }
+            
+            completion(nil)
         }
     }
 }

@@ -32,4 +32,19 @@ class OrderCell: UITableViewCell {
             ]
         )
     }
+    
+    func configureDetailOrder(with order: DetailOrderModel) {
+        self.quantityLabel.text = "x\(order.quantity)"
+        self.priceProductLabel.text = order.price
+        self.nameProductLabel.text = order.name
+        let url = URL(string: order.image)
+        self.productOrderImgView.kf.indicatorType = .activity
+        self.productOrderImgView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "placeholder"),
+            options: [
+                .transition(.fade(0.3))
+            ]
+        )
+    }
 }

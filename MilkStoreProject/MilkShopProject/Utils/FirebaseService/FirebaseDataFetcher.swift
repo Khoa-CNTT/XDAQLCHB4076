@@ -3,6 +3,9 @@ import FirebaseAuth
 import FirebaseFirestore
 
 class FirebaseDataFetcher {
+    
+    static let shared = FirebaseDataFetcher()
+    
     private let db: Firestore
     
     init() {
@@ -67,7 +70,6 @@ class FirebaseDataFetcher {
     }
     
     func updateUserAddress(uid: String, newAddress: String, completion: ((Error?) -> Void)? = nil) {
-        let db = Firestore.firestore()
         let userRef = db.collection("usernew").document(uid)
         
         userRef.updateData([
@@ -83,7 +85,6 @@ class FirebaseDataFetcher {
     }
     
     func fetchUserAddresses(uid: String, completion: @escaping ([String]?, Error?) -> Void) {
-        let db = Firestore.firestore()
         let userRef = db.collection("usernew").document(uid)
         
         userRef.getDocument { document, error in
@@ -96,6 +97,57 @@ class FirebaseDataFetcher {
             } else {
                 completion(nil, error)
             }
+        }
+    }
+    
+    func fetchAllUsers(completion: @escaping (String, String, Error?) -> Void) {
+        
+        db.collection("usernew").getDocuments { (snapshot, error) in
+            if let error = error {
+                print("Error fetching users: \(error.localizedDescription)")
+                completion("", "", error)
+            } else {
+                snapshot?.documents.forEach { document in
+                    let name = document.data()["username"] as? String ?? "Unknown"
+                    let phone = document.data()["phone"] as? String ?? "Unknown"
+                    
+                    completion(name, phone, nil)
+                }
+            }
+        }
+    }
+    
+    func fetchOrders(for userId: String, completion: @escaping ([[String: Any]]?, Error?) -> Void) {
+        
+        db.collection("order").whereField("iduser", isEqualTo: userId).getDocuments { snapshot, error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            var orders: [[String: Any]] = []
+            snapshot?.documents.forEach { document in
+                orders.append(document.data())
+            }
+            
+            completion(orders, nil)
+        }
+    }
+    
+    func fetchAllOrders(completion: @escaping ([[String: Any]]?, Error?) -> Void) {
+        
+        db.collection("order").getDocuments { snapshot, error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            
+            var orders: [[String: Any]] = []
+            snapshot?.documents.forEach { document in
+                orders.append(document.data())
+            }
+            
+            completion(orders, nil)
         }
     }
 }

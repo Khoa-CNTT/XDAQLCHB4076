@@ -134,9 +134,9 @@ struct UDHelper {
         }
     }
     
-    static var roleUser: String {
+    static var roleUser: Bool {
         get {
-            UDKey.roleUser.value.unwrapped(or: "")
+            UDKey.roleUser.value.unwrapped(or: false)
         }
         
         set {
@@ -191,6 +191,16 @@ struct UDHelper {
         
         set {
             UDKey.isLoginSuccess.set(newValue)
+        }
+    }
+    
+    static var isFirstFetchDataInSplash: Bool {
+        get {
+            UDKey.isFirstFetchDataInSplash.value.unwrapped(or: true)
+        }
+        
+        set {
+            UDKey.isFirstFetchDataInSplash.set(newValue)
         }
     }
 }

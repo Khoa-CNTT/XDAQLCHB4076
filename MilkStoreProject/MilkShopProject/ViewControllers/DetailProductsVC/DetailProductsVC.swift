@@ -12,6 +12,7 @@ class DetailProductsVC: BaseViewController {
     
     //MARK: Outlets
     
+    @IBOutlet weak var editProductButton: UIButton!
     @IBOutlet weak var countProductTF: UITextField!
     @IBOutlet weak var addProductButton: UIButton!
     @IBOutlet weak var ctnTopNotiAddProductSuccessView: NSLayoutConstraint!
@@ -42,7 +43,6 @@ class DetailProductsVC: BaseViewController {
         super.init(nibName: nil, bundle: nil)
         
         self.dataMilk = dataMilk
-        print("dataMilk: \(dataMilk.idProduct ?? "")")
     }
     
     required init?(coder: NSCoder) {
@@ -57,8 +57,25 @@ class DetailProductsVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.editProductButton.isHidden = !UDHelper.roleUser
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let dataMilk = dataMilk,
+        let quantity = dataMilk.quantity else {
+            return
+        }
+        
+        if quantity == 0 {
+            showAlert(title: "Sản phẩm đã hết hàng",
+                      message: "Bạn vui lòng chọn sản phẩm khác.") { _ in
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+    }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -94,7 +111,7 @@ class DetailProductsVC: BaseViewController {
         }
         self.countProductTF.text = "\(self.countProduct)"
         if let dataMilk = dataMilk,
-           let totalImport = dataMilk.totalImport {
+           let totalImport = dataMilk.quantity {
             if self.countProduct > totalImport {
                 showAlert(title: "Số lượng vượt quá",
                           message: "Số lượng bạn muốn mua lớn hơn số lượng hiện có trong cửa hàng. Vui lòng điều chỉnh lại.")
@@ -112,7 +129,7 @@ class DetailProductsVC: BaseViewController {
                 self.countProductTF.text = "1"
             } else {
                 if let idProduct = dataMilk.idProduct {
-                    CartService.share.addProduct(productId: idProduct,
+                    CartService.shared.addProduct(productId: idProduct,
                                                  quantity: self.countProduct)
                 }
                 self.showDialogCopy()
@@ -142,7 +159,7 @@ class DetailProductsVC: BaseViewController {
         if let numberText = self.countProductTF.text,
            let count = Int(numberText),
            let dataMilk = dataMilk,
-           let totalImport = dataMilk.totalImport {
+           let totalImport = dataMilk.quantity {
             if count > totalImport {
                 showAlert(title: "Số lượng vượt quá",
                           message: "Số lượng bạn muốn mua lớn hơn số lượng hiện có trong cửa hàng. Vui lòng điều chỉnh lại.")

@@ -10,23 +10,27 @@ import zpdk
 import FirebaseCore
 import FirebaseFirestore
 
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         ZaloPaySDK.sharedInstance()?.initWithAppId(2554, uriScheme: "demozpdk://app", environment: .sandbox)
         FirebaseApp.configure()
         configWindow()
+        
         return true
     }
-
+    
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return ZaloPaySDK.sharedInstance().application(app, open: url, sourceApplication:"vn.com.vng.zalopay", annotation: nil)
+        if url.scheme == "demozpdk" {
+            return ZaloPaySDK.sharedInstance().application(app, open: url, sourceApplication: "vn.com.vng.zalopay", annotation: nil)
+        }
+        
+        return false
     }
-
+    
     func configWindow() {
         window = UIWindow(frame: UIScreen.main.bounds)
         let splashVC = UINavigationController(rootViewController: SplashVC())
@@ -39,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     static func setRoot(_ viewController: UIViewController, isNavi: Bool = false) {
         guard let window = UIWindow.key else { return }
-
+        
         UIView.transition(with: window, duration: 0.1, options: .transitionCrossDissolve, animations: {
             let oldState = UIView.areAnimationsEnabled
             UIView.setAnimationsEnabled(false)

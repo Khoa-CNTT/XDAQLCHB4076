@@ -52,12 +52,12 @@
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="ic_back"/>
                                     <connections>
-                                        <action selector="didTapBackButton:" destination="-1" eventType="touchUpInside" id="BSk-o7-Jx5"/>
+                                        <action selector="didTapBackButton:" destination="-1" eventType="touchUpInside" id="Nou-if-rFG"/>
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thêm địa chỉ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Kg-Cc-poT">
-                                    <rect key="frame" x="55.999999999999993" y="14.333333333333327" width="102.33333333333331" height="20.333333333333329"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <rect key="frame" x="55.999999999999993" y="12.666666666666671" width="124.33333333333331" height="24"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -583,7 +583,7 @@
     <resources>
         <image name="ic_back" width="10" height="17.333333969116211"/>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

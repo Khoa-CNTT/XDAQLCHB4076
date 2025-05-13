@@ -55,128 +55,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F107514C-535F-4723-892E-EBC755AAB988"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MilkShopProject/ViewControllers/RegisterVC/RegisterVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
-            landmarkName = "handleDataTextField()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "FA80D7FB-DD04-4039-A833-6F7D64D9C3AB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MilkShopProject/ViewControllers/RegisterVC/RegisterVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "signIn()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "64AD0623-47F7-43D3-8DD2-76FA62425E6E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MilkShopProject/ViewControllers/RegisterVC/RegisterVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "textFieldDidEndEditing(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "53FCC45C-79AB-4727-88F0-677F8950830C"
+            uuid = "78721562-7320-4D0C-9FAE-BB84D76049B0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MilkShopProject/Utils/FirebaseUploader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "readAndUploadProducts(from:)"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "changeUserPassword(oldPassword:newPassword:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "71241846-6AD9-4008-8AA7-FD65C8C0F017"
+            uuid = "315E915C-28FA-4292-843C-4F4BAAC03A61"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MilkShopProject/Utils/FirebaseUploader.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "readAndUploadProducts(from:)"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "changeUserPassword(oldPassword:newPassword:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "468AD953-2740-4007-9616-9A28CFA4CA95"
+            uuid = "D9E1A521-B71F-4ED7-8834-4EB9E0EC7E05"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MilkShopProject/Utils/FirebaseUploader.swift"
+            filePath = "MilkShopProject/ViewControllers/ChangePasswordVC/ChangePasswordVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "readAndUploadProducts(from:)"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "didTapConfirmButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "91692E94-8B69-4D2E-BF59-8A186FBC6511"
+            uuid = "2B905E4E-2F7B-4079-99FF-877FAC8C88AB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MilkShopProject/Utils/FirebaseUploader.swift"
+            filePath = "MilkShopProject/ViewControllers/ChangePasswordVC/ChangePasswordVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "readAndUploadProducts(from:)"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "didTapConfirmButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7B71D875-3E27-4877-BA87-FF4E32B8AA09"
+            uuid = "F8767D89-B9A5-4931-B635-28BC66C790C0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MilkShopProject/Utils/FirebaseUploader.swift"
+            filePath = "MilkShopProject/ViewControllers/ChangePasswordVC/ChangePasswordVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "readAndUploadProducts(from:)"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "didTapConfirmButton(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

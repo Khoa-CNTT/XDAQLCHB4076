@@ -17,6 +17,7 @@
                 <outlet property="ctnHeightTableView" destination="1F9-1d-abz" id="5pF-aW-ohP"/>
                 <outlet property="ctnTopNotiAddProductSuccessView" destination="tGN-ZW-Hcu" id="XuA-OB-unq"/>
                 <outlet property="detailsProductLabel" destination="x6x-0D-GrY" id="e3S-nU-wQT"/>
+                <outlet property="editProductButton" destination="VEO-XD-KGv" id="78J-iL-rTb"/>
                 <outlet property="energyLabel" destination="HuZ-D8-TgE" id="Aqx-GP-U6x"/>
                 <outlet property="energyView" destination="TAO-Wp-0ZM" id="Ysu-du-gE1"/>
                 <outlet property="fatLabel" destination="Ovq-Qv-VGb" id="waB-gj-5lM"/>
@@ -517,6 +518,23 @@
                     <viewLayoutGuide key="contentLayoutGuide" id="zGO-k2-nSL"/>
                     <viewLayoutGuide key="frameLayoutGuide" id="Nzm-HC-Wbf"/>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEO-XD-KGv">
+                    <rect key="frame" x="16" y="760" width="358" height="50"/>
+                    <color key="backgroundColor" red="0.0" green="0.23921568630000001" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="lR1-aE-MFm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="Chỉnh sửa">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layerCornerRadius">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LW-Ic-iKy">
                     <rect key="frame" x="20" y="-200" width="350" height="50"/>
                     <subviews>
@@ -554,8 +572,11 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="VEO-XD-KGv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="1df-KG-KZo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="VEO-XD-KGv" secondAttribute="bottom" id="4uH-ZG-TL2"/>
                 <constraint firstItem="ukA-pP-Y0D" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="BjH-Mn-5J7"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0LW-Ic-iKy" secondAttribute="trailing" constant="20" id="EZm-j0-dZV"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="VEO-XD-KGv" secondAttribute="trailing" constant="16" id="EgJ-ej-8um"/>
                 <constraint firstItem="VKV-H0-5Y4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Hce-gc-AB8"/>
                 <constraint firstItem="ukA-pP-Y0D" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="T0H-rA-4X1"/>
                 <constraint firstItem="ukA-pP-Y0D" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="UDg-eY-LLA"/>
