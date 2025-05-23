@@ -351,56 +351,56 @@ extension UIImageView {
     }
     
     //NUKE:
-//    func loadImageWithNuke(_ urlString : String) {
-//        guard let url = URL.init(string: urlString) else {
-//            return
-//        }
-//        let activityIndicator = self.activityIndicator
-//        DispatchQueue.main.async {
-//            activityIndicator.startAnimating()
-//        }
-//        //        let options = ImageLoadingOptions(placeholder: UIImage(named: "place_holder_image"))
-//        
-//        Nuke.loadImage(with: url, into: self, progress: { response, completed, total in
-//        }) { result in
-//            activityIndicator.stopAnimating()
-//            activityIndicator.removeFromSuperview()
-//            switch result {
-//            case .success(_): break
-//            case .failure(let error):
-//                print("__Err", error)
-//                self.downloadImage(urlString)
-//            }
-//        }
-//    }
-//    //
-//    func downloadImage(_ urlString : String){
-//        image = nil
-//        guard let url = URL.init(string: urlString) else {
-//            return
-//        }
-//        let activityIndicator = self.activityIndicator
-//        DispatchQueue.main.async {
-//            activityIndicator.startAnimating()
-//        }
-//        let resource = ImageResource(name: "",bundle: Bundle())
-//        
-//        KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
-//            switch result {
-//            case .success(let value):
-//                print("Image: \(value.image). Got from: \(value.cacheType)")
-//                self.image = value.image
-//            case .failure(let error):
-//                print("__ErrorKf: \(error)")
-//                self.image =  UIImage.init(named: "place_holder_image")
-//                //                self.loadImageFromUrl(urlString)
-//            }
-//            DispatchQueue.main.async {
-//                activityIndicator.stopAnimating()
-//                activityIndicator.removeFromSuperview()
-//            }
-//        }
-//    }
+    //    func loadImageWithNuke(_ urlString : String) {
+    //        guard let url = URL.init(string: urlString) else {
+    //            return
+    //        }
+    //        let activityIndicator = self.activityIndicator
+    //        DispatchQueue.main.async {
+    //            activityIndicator.startAnimating()
+    //        }
+    //        //        let options = ImageLoadingOptions(placeholder: UIImage(named: "place_holder_image"))
+    //
+    //        Nuke.loadImage(with: url, into: self, progress: { response, completed, total in
+    //        }) { result in
+    //            activityIndicator.stopAnimating()
+    //            activityIndicator.removeFromSuperview()
+    //            switch result {
+    //            case .success(_): break
+    //            case .failure(let error):
+    //                print("__Err", error)
+    //                self.downloadImage(urlString)
+    //            }
+    //        }
+    //    }
+    //    //
+    //    func downloadImage(_ urlString : String){
+    //        image = nil
+    //        guard let url = URL.init(string: urlString) else {
+    //            return
+    //        }
+    //        let activityIndicator = self.activityIndicator
+    //        DispatchQueue.main.async {
+    //            activityIndicator.startAnimating()
+    //        }
+    //        let resource = ImageResource(name: "",bundle: Bundle())
+    //
+    //        KingfisherManager.shared.retrieveImage(with: resource, options: nil, progressBlock: nil) { result in
+    //            switch result {
+    //            case .success(let value):
+    //                print("Image: \(value.image). Got from: \(value.cacheType)")
+    //                self.image = value.image
+    //            case .failure(let error):
+    //                print("__ErrorKf: \(error)")
+    //                self.image =  UIImage.init(named: "place_holder_image")
+    //                //                self.loadImageFromUrl(urlString)
+    //            }
+    //            DispatchQueue.main.async {
+    //                activityIndicator.stopAnimating()
+    //                activityIndicator.removeFromSuperview()
+    //            }
+    //        }
+    //    }
 }
 
 extension UIImageView {
@@ -410,5 +410,32 @@ extension UIImageView {
         layer.borderColor = UIColor.clear.cgColor
         layer.cornerRadius = self.frame.height / 2
         clipsToBounds = true
+    }
+    
+    func loadBase64Image(_ base64String: String?) {
+        guard let base64String = base64String else { return }
+        
+        if base64String.hasPrefix("data:image") {
+            let components = base64String.components(separatedBy: ",")
+            if components.count > 1, let data = Data(base64Encoded: components[1]) {
+                self.image = UIImage(data: data)
+            }
+        } else if let data = Data(base64Encoded: base64String) {
+            self.image = UIImage(data: data)
+        }
+    }
+}
+
+extension UIImageView {
+    func loadImage(from urlString: String?) {
+        guard let urlString = urlString else { return }
+        
+        if urlString.hasPrefix("data:image") {
+            self.loadBase64Image(urlString)
+        } else {
+            let url = URL(string: urlString)
+            self.kf.indicatorType = .activity
+            self.kf.setImage(with: url)
+        }
     }
 }

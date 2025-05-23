@@ -70,24 +70,23 @@ class AccountVC: BaseViewController {
             try Auth.auth().signOut()
             UDHelper.isLoginSuccess = false
             Global.isDimissBottomSheet = true
-            AppDelegate.setRoot(LoginVC())
+            let loginVC = LoginVC()
+            AppDelegate.setRoot(loginVC, isNavi: true)
         } catch let error {
             print("Error signing out: \(error.localizedDescription)")
         }
     }
     
-    func animateLogoutPopup() {
-        self.containerPopupView.alpha = 0
-        self.popupLogoutView.alpha = 0
+    func configLogout() {
+        let alert = UIAlertController(title: "Thông báo", message: "Bạn có muốn đăng xuất không?", preferredStyle: UIAlertController.Style.alert)
         
-        UIView.animate(withDuration: 0.5, animations: {
-            self.containerPopupView.alpha = 1
-        }) { _ in
-            self.popupLogoutView.isHidden = false
-            UIView.animate(withDuration: 0.5, animations: {
-                self.popupLogoutView.alpha = 1
-            })
-        }
+        alert.addAction(UIAlertAction(title: "Đồng ý", style: UIAlertAction.Style.destructive, handler: { _ in
+            self.logOut()
+        }))
+
+        alert.addAction(UIAlertAction(title: "Đóng", style: UIAlertAction.Style.cancel, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 
@@ -146,7 +145,7 @@ extension AccountVC: UITableViewDataSource, UITableViewDelegate {
                 let vc = OrderPurchaseVC()
                 self.push(vc)
             case .logout:
-                animateLogoutPopup()
+                configLogout()
             }
         } else {
             switch infoType[indexPath.row] {
@@ -170,7 +169,7 @@ extension AccountVC: UITableViewDataSource, UITableViewDelegate {
                 let vc = OrderPurchaseVC()
                 self.push(vc)
             case .logout:
-                animateLogoutPopup()
+                configLogout()
             default:
                 break
             }

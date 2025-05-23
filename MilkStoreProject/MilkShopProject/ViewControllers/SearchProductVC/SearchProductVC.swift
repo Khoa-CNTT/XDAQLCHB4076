@@ -77,23 +77,9 @@ extension SearchProductVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withClass: SearchTableCell.self, for: indexPath)
         cell.nameProductLabel.text = filteredProducts[indexPath.row].nameMilk
-        let url = URL(string: filteredProducts[indexPath.row].imgMilk)
-        cell.productImageView.kf.indicatorType = .activity
-        cell.productImageView.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "placeholder"),
-            options: [
-                .transition(.fade(0.3))
-            ],
-            completionHandler: { result in
-                switch result {
-                case .success(let value):
-                    print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                case .failure(let error):
-                    print("Error loading image: \(error)")
-                }
-            }
-        )
+        if let imageUrl = filteredProducts[indexPath.row].imgMilk {
+            cell.productImageView.loadImage(from: imageUrl)
+        }
         cell.selectionStyle = .none
         return cell
     }

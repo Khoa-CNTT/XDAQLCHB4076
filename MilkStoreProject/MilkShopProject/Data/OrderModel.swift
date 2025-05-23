@@ -17,6 +17,7 @@ struct OrderModel {
 }
 
 struct DetailOrderModel {
+    var idProduct: String
     var name: String
     var price: String
     var quantity: Int

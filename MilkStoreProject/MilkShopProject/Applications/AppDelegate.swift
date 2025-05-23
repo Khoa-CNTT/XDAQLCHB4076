@@ -47,7 +47,15 @@ extension AppDelegate {
         UIView.transition(with: window, duration: 0.1, options: .transitionCrossDissolve, animations: {
             let oldState = UIView.areAnimationsEnabled
             UIView.setAnimationsEnabled(false)
-            window.rootViewController = isNavi ? UINavigationController(rootViewController: viewController) : viewController
+            if isNavi {
+                if let navController = viewController as? UINavigationController {
+                    window.rootViewController = navController
+                } else {
+                    window.rootViewController = UINavigationController(rootViewController: viewController)
+                }
+            } else {
+                window.rootViewController = viewController
+            }
             window.makeKeyAndVisible()
             UIView.setAnimationsEnabled(oldState)
         })

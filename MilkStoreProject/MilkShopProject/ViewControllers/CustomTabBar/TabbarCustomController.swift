@@ -11,7 +11,7 @@ class TabbarCustomController: UITabBarController {
     
     var customTabBar: CustomTabbar!
     var tabBarHeight = 80.0
-    private var homeVC = HomeVC()
+    private var homeVC = UDHelper.roleUser ? HomeAdminVC() : HomeVC()
     private var cartVC = NotificationUserVC()
     private var settingVC = AccountVC()
     

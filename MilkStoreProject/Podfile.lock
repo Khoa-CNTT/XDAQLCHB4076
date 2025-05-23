@@ -1145,6 +1145,8 @@ PODS:
     - abseil/meta/type_traits
     - abseil/xcprivacy
   - abseil/xcprivacy (1.20240116.2)
+  - Alamofire (5.10.1)
+  - AnimatedField (2.4.4)
   - BoringSSL-GRPC (0.0.36):
     - BoringSSL-GRPC/Implementation (= 0.0.36)
     - BoringSSL-GRPC/Interface (= 0.0.36)
@@ -1152,6 +1154,9 @@ PODS:
     - BoringSSL-GRPC/Interface (= 0.0.36)
   - BoringSSL-GRPC/Interface (0.0.36)
   - CryptoSwift (1.8.3)
+  - DGCharts (5.1.0):
+    - DGCharts/Core (= 5.1.0)
+  - DGCharts/Core (5.1.0)
   - Firebase/CoreOnly (11.4.2):
     - FirebaseCore (= 11.4.2)
   - Firebase/Database (11.4.2):
@@ -1391,7 +1396,10 @@ PODS:
   - SwifterSwift/WebKit (6.2.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.10)
+  - AnimatedField (~> 2.4)
   - CryptoSwift
+  - DGCharts
   - Firebase/Database
   - Firebase/Storage
   - FirebaseAuth
@@ -1408,8 +1416,11 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
+    - AnimatedField
     - BoringSSL-GRPC
     - CryptoSwift
+    - DGCharts
     - Firebase
     - FirebaseAppCheckInterop
     - FirebaseAuth
@@ -1442,8 +1453,11 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: d121da9ef7e2ff4cab7666e76c5a3e0915ae08c3
+  Alamofire: 840d2a1ad82355b536ec6ba5f97e5bfa54600ca3
+  AnimatedField: af48a2d59a50b33b30446267f7f2af274296203c
   BoringSSL-GRPC: ca6a8e5d04812fce8ffd6437810c2d46f925eaeb
   CryptoSwift: 967f37cea5a3294d9cce358f78861652155be483
+  DGCharts: 1c6daf585b6cfc78807af44ea690d357c410627f
   Firebase: 7fd5466678d964be78fbf536d8a3385da19c4828
   FirebaseAppCheckInterop: 1b9643ae2f1ee214488caa2f8e32b7bc2f0f3735
   FirebaseAuth: c359af98bd703cbf4293eec107a40de08ede6ce6
@@ -1474,6 +1488,6 @@ SPEC CHECKSUMS:
   SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SwifterSwift: dd00873fb09cde19da88bdb2878f9fe70fe27b0f
 
-PODFILE CHECKSUM: c7ffb5e21505a4cdf8564042153d93ffe0aa7009
+PODFILE CHECKSUM: c1a8643ab139ea1ad179540cbb17fc043a91d3d1
 
 COCOAPODS: 1.16.2

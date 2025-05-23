@@ -144,7 +144,7 @@
                                     <rect key="frame" x="353" y="56" width="24" height="24"/>
                                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" image="ic_Tick"/>
+                                    <state key="normal" image="ic_Untick"/>
                                     <connections>
                                         <action selector="didTapSelectedAllButton:" destination="-1" eventType="touchUpInside" id="RGd-DE-4i4"/>
                                     </connections>
@@ -199,7 +199,7 @@
     </objects>
     <resources>
         <image name="icBackDetail" width="90" height="90"/>
-        <image name="ic_Tick" width="24" height="24"/>
+        <image name="ic_Untick" width="24" height="24"/>
         <image name="img_cart_isEmpty" width="256" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

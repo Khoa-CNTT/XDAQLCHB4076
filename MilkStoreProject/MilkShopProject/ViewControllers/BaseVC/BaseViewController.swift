@@ -10,10 +10,15 @@ import StoreKit
 import Lottie
 import AVFoundation
 import AudioToolbox
+import Photos
+import PhotosUI
 
 // MARK: - Definitions
 
 class BaseViewController: UIViewController {
+    
+    // MARK: - Properties
+    var onImagePicked: ((UIImage) -> Void)?
     
     // MARK: - Override
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -116,7 +121,7 @@ class BaseViewController: UIViewController {
     //        self.present(vc: iapVC)
     //    }
     
-    func isValidPassword(_ password: String, confirmation: String) -> Bool {
+    func isValidPassword(_ password: String) -> Bool {
         let minLength = 8
         let uppercaseRegex = try! NSRegularExpression(pattern: "[A-Z]")
         let lowercaseRegex = try! NSRegularExpression(pattern: "[a-z]")
@@ -129,9 +134,7 @@ class BaseViewController: UIViewController {
         let containsNumber = numberRegex.firstMatch(in: password, options: [], range: NSRange(location: 0, length: password.utf16.count)) != nil
         let containsSpecialCharacter = specialCharRegex.firstMatch(in: password, options: [], range: NSRange(location: 0, length: password.utf16.count)) != nil
         
-        let passwordsMatch = password == confirmation
-        
-        return isLengthValid && containsUppercase && containsLowercase && containsNumber && containsSpecialCharacter && passwordsMatch
+        return isLengthValid && containsUppercase && containsLowercase && containsNumber && containsSpecialCharacter
     }
     
     func formattedDescription(from rawText: String) -> String {
@@ -159,6 +162,75 @@ class BaseViewController: UIViewController {
         formatter.groupingSeparator = "."
         formatter.maximumFractionDigits = 0
         return formatter.string(from: NSNumber(value: value)) ?? "0"
+    }
+    
+    func checkPhotoPermission() {
+        let status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        
+        switch status {
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization(for: .readWrite) { [weak self] newStatus in
+                DispatchQueue.main.async {
+                    if newStatus == .authorized {
+                        self?.presentImagePicker()
+                    } else {
+                        self?.showPermissionAlert()
+                    }
+                }
+            }
+        case .restricted, .denied:
+            showPermissionAlert()
+        case .authorized, .limited:
+            presentImagePicker()
+        @unknown default:
+            break
+        }
+    }
+    
+     func showPermissionAlert() {
+        let alert = UIAlertController(
+            title: "Photo Access Required",
+            message: "Please allow access to your photos in Settings to select an image.",
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Settings", style: .default) { _ in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
+            }
+        })
+        
+        present(alert, animated: true)
+    }
+    
+    func presentImagePicker() {
+        var config = PHPickerConfiguration(photoLibrary: .shared())
+        config.selectionLimit = 1
+        config.filter = .images
+        
+        let picker = PHPickerViewController(configuration: config)
+        picker.delegate = self
+        present(picker, animated: true)
+    }
+    
+    
+}
+
+// MARK: - PHPickerViewControllerDelegate
+extension BaseViewController: PHPickerViewControllerDelegate {
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true)
+        
+        guard let result = results.first else { return }
+        
+        result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (object, error) in
+            if let image = object as? UIImage {
+                DispatchQueue.main.async {
+                    self?.onImagePicked?(image)
+                }
+            }
+        }
     }
 }
 

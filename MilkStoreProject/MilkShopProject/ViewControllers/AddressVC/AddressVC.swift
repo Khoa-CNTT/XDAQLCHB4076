@@ -88,14 +88,45 @@ extension AddressVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        if indexPath.row == 1 {
+        let isLastRow = indexPath.row == tableView.numberOfRows(inSection: indexPath.section) - 1
+        if isLastRow {
             return nil
         }
 
-        let deleteAction = UIContextualAction(style: .destructive, title: "") { (action, view, completionHandler) in
-            self.addresses.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
-            completionHandler(true)
+        let deleteAction = UIContextualAction(style: .destructive, title: "") { [weak self] (action, view, completionHandler) in
+            guard let self = self else { return }
+            
+            let addressToDelete = self.addresses[indexPath.row]
+            
+            let alert = UIAlertController(title: "Xác nhận", message: "Bạn có chắc chắn muốn xóa địa chỉ này?", preferredStyle: .alert)
+            
+            let cancelAction = UIAlertAction(title: "Hủy", style: .cancel) { _ in
+                completionHandler(false)
+            }
+            
+            let deleteAction = UIAlertAction(title: "Xóa", style: .destructive) { _ in
+                if let uid = Auth.auth().currentUser?.uid {
+                    self.showHUD(label: "Đang xóa...")
+                    FirebaseDataFetcher.shared.deleteUserAddress(uid: uid, addressToDelete: addressToDelete) { error in
+                        self.dismissHUD()
+                        if let error = error {
+                            self.dismissHUD()
+                            self.showAlert(title: "Lỗi", message: "Không thể xóa địa chỉ: \(error.localizedDescription)")
+                        } else {
+                            self.dismissHUD()
+                            self.addresses.remove(at: indexPath.row)
+                            tableView.deleteRows(at: [indexPath], with: .automatic)
+                            self.showToast(message: "Đã xóa địa chỉ thành công")
+                        }
+                        completionHandler(true)
+                    }
+                }
+            }
+            
+            alert.addAction(cancelAction)
+            alert.addAction(deleteAction)
+            
+            self.present(alert, animated: true)
         }
         
         deleteAction.image = UIImage(systemName: "trash")

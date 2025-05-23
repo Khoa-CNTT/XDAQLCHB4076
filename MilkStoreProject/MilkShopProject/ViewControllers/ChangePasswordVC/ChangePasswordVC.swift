@@ -38,7 +38,14 @@ class ChangePasswordVC: BaseViewController {
         let newPassword = newPasswordTF.text ?? ""
         let confirmNewPassword = confirmNewPasswordTF.text ?? ""
         
-        guard let userId = Auth.auth().currentUser?.uid else { return }
+        guard let userId = Auth.auth().currentUser?.uid else {
+            self.showToast(message: "Không tìm thấy người dùng")
+            return }
+        
+        if newPassword != confirmNewPassword {
+            self.showAlert(title: "Lỗi", message: "Mật khẩu xác nhận không khớp!")
+            return
+        }
         
         let db = Firestore.firestore()
         let userRef = db.collection("usernew").document(userId)
@@ -52,24 +59,35 @@ class ChangePasswordVC: BaseViewController {
             }
             
             if let document = document, document.exists {
-                if passwordOld.isEmpty || newPassword.isEmpty || confirmNewPasswordTF.isEmpty {
+                if passwordOld.isEmpty || newPassword.isEmpty || confirmNewPassword.isEmpty {
                     self.dismiss()
                     return
                 }
                 
+                self.showHUD(label: "Đang xử lý...")
                 FirebaseUploader.shared.changeUserPassword(
                     oldPassword: passwordOld,
                     newPassword: newPassword
                 ) { error in
-                    if let error = error {
-                        self.showToast(message: "Lỗi đổi mật khẩu: \(error.localizedDescription)")
+                    if let _ = error {
+                        self.dismissHUD()
+                        self.showAlert(title: "Lỗi", message: "Mật khẩu cũ không đúng!")
                     } else {
-                        self.showToast(message: "Đổi mật khẩu thành công!")
-                        self.dismiss()
+                        self.dismissHUD()
+                        self.showAlert(title: "Thành công", message: "Đổi mật khẩu thành công!") { _ in
+                            self.dismiss()
+                        }
                     }
                 }
             }
         }
+    }
+    
+    private func showAlert(title: String, message: String, completion: ((UIAlertAction) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: completion)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

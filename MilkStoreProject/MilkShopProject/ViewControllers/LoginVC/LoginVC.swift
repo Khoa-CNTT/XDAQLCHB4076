@@ -18,7 +18,6 @@ class LoginVC: BaseViewController {
         }
     }
     @IBOutlet weak var phoneNumberTF: UITextField!
-    @IBOutlet weak var forgotPwButton: UIButton!
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -47,6 +46,11 @@ class LoginVC: BaseViewController {
     
     @IBAction func didTapSignUpButton(_ sender: UIButton) {
         self.push(RegisterVC())
+    }
+    
+    @IBAction func didTapForgotPwButton(_ sender: UIButton) {
+        let vc = ForgotPasswordVC()
+        self.push(vc)
     }
     
     private func setupTF() {
@@ -151,14 +155,21 @@ extension LoginVC {
                                         print("[HL-LOG] ViewController đã bị hủy.")
                                         return
                                     }
-
-                                    if let nav = self.navigationController,
-                                       nav.topViewController === self {
-                                        AppDelegate.setRoot(TabbarCustomController(), isNavi: true)
-                                        UDHelper.isLoginSuccess = true
-                                        print("[HL-LOG] Chuyển sang màn hình chính - login success")
-                                    } else {
-                                        print("[HL-LOG] Không thể push - không ở top view controller")
+                                    
+                                    DispatchQueue.main.async {
+                                        if let nav = self.navigationController {
+                                            if nav.topViewController === self {
+                                                AppDelegate.setRoot(TabbarCustomController(), isNavi: true)
+                                                UDHelper.isLoginSuccess = true
+                                                print("[HL-LOG] Chuyển sang màn hình chính - login success")
+                                            } else {
+                                                print("[HL-LOG] Không thể push - không ở top view controller")
+                                            }
+                                        } else {
+                                            AppDelegate.setRoot(TabbarCustomController(), isNavi: true)
+                                            UDHelper.isLoginSuccess = true
+                                            print("[HL-LOG] Chuyển sang màn hình chính - login success (no nav)")
+                                        }
                                     }
                                 }
                             }

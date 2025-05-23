@@ -54,23 +54,9 @@ class ProductCell: UITableViewCell {
     }
     
     func configure(_ product: DataMilkObject, indexPath: IndexPath) {
-        let url = URL(string: product.imgMilk)
-        self.productImageView.kf.indicatorType = .activity
-        self.productImageView.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "placeholder"),
-            options: [
-                .transition(.fade(0.3))
-            ],
-            completionHandler: { result in
-                switch result {
-                case .success(let value):
-                    print("Image loaded: \(value.source.url?.absoluteString ?? "")")
-                case .failure(let error):
-                    print("Error loading image: \(error)")
-                }
-            }
-        )
+        if let imageUrl = product.imgMilk {
+            productImageView.loadImage(from: imageUrl)
+        }
         self.productNameLabel.text = product.nameMilk
         self.productPriceLabel.text = product.price
         self.quantityProductLabel.text = "\(product.quantity ?? 0)"

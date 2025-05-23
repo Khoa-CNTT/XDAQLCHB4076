@@ -114,6 +114,10 @@ extension OrderVC: AddressVCDelegate {
 
 extension OrderVC: ZPPaymentDelegate {
     func paymentDidSucceeded(_ transactionId: String!, zpTranstoken: String!, appTransId: String!) {
+        print("Payment succeeded - Transaction ID: \(transactionId ?? "")")
+        print("Payment succeeded - ZP Token: \(zpTranstoken ?? "")")
+        print("Payment succeeded - App Trans ID: \(appTransId ?? "")")
+        
         self.showAlert(title: "Thành công", message: "Thanh toán thành công!")
         
         guard let userId = Auth.auth().currentUser?.uid else {
@@ -121,76 +125,86 @@ extension OrderVC: ZPPaymentDelegate {
             return
         }
         
-        let address = self.addressLabel.text ?? "Địa chỉ mặc định"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
-        let formattedDate = dateFormatter.string(from: Date())
-        let detail = selectedCartItems.map { item in
-            return [
-                "price": formatCurrency((Double(convertPriceToInt(item.price) ?? 0))),
-                "pic": item.imageProduct,
-                "quantity": item.quantity,
-                "name": item.nameProduct
-            ]
-        }
-        let idpay = appTransId ?? ""
-        let iduser = userId
-        let priceship = formatCurrency(shipping)
-        let statusorder = Global.orderConfirm
-        let totalprice = totalAmount
-        
-        let db = Firestore.firestore()
-        let orderRef = db.collection("order").document()
-        
-        orderRef.setData([
-            "address": address,
-            "date": formattedDate,
-            "detail": detail,
-            "idpay": idpay,
-            "iduser": iduser,
-            "priceship": priceship,
-            "statusorder": statusorder,
-            "totalprice": totalprice
-        ]) { error in
-            if let error = error {
-                print("Error creating order in Firestore: \(error.localizedDescription)")
-            } else {
-                print("Order successfully created in Firestore!")
-                
-                let notificationRef = db.collection("notification").document()
-                
-                notificationRef.setData([
-                    "datetime": formattedDate,
-                    "idorder": orderRef.documentID,
-                    "isSeen": false,
-                    "name": userId,
-                    "notification": "Bạn có đơn hàng mới",
-                    "role": true
-                ]) { error in
-                    if let error = error {
-                        print("Error creating notification: \(error.localizedDescription)")
-                    } else {
-                        print("Notification created successfully!")
-                    }
-                }
-                
-                for item in self.selectedCartItems {
-                    FirebaseUploader.shared.updateProductAfterPurchase(productId: item.idProduct, quantityPurchased: item.quantity) { error in
+        ZaloPayService.shared.fetchZPTransId(appTransId: appTransId ?? "") { zpTransId in
+            guard let zpTransId = zpTransId else {
+                print("Không lấy được zp_trans_id")
+                return
+            }
+            
+            let address = self.addressLabel.text ?? "Địa chỉ mặc định"
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy HH:mm"
+            let formattedDate = dateFormatter.string(from: Date())
+            let detail = self.selectedCartItems.map { item in
+                return [
+                    "idProduct": item.idProduct,
+                    "price": self.formatCurrency((Double(self.convertPriceToInt(item.price) ?? 0))),
+                    "pic": item.imageProduct,
+                    "quantity": item.quantity,
+                    "name": item.nameProduct
+                ]
+            }
+            let idpay = transactionId ?? ""
+            let iduser = userId
+            let priceship = self.formatCurrency(self.shipping)
+            let statusorder = Global.orderConfirm
+            let totalprice = self.totalAmount
+            
+            let db = Firestore.firestore()
+            let orderRef = db.collection("order").document()
+            
+            orderRef.setData([
+                "address": address,
+                "date": formattedDate,
+                "detail": detail,
+                "idpay": idpay,
+                "iduser": iduser,
+                "priceship": priceship,
+                "statusorder": statusorder,
+                "totalprice": totalprice,
+                "appTransId": appTransId ?? "",
+                "zpTransId": zpTransId
+            ]) { error in
+                if let error = error {
+                    print("Error creating order in Firestore: \(error.localizedDescription)")
+                } else {
+                    print("Order successfully created in Firestore!")
+                    
+                    let notificationRef = db.collection("notification").document()
+                    
+                    notificationRef.setData([
+                        "datetime": formattedDate,
+                        "idorder": orderRef.documentID,
+                        "isSeen": false,
+                        "name": userId,
+                        "notification": "Bạn có đơn hàng mới",
+                        "role": true
+                    ]) { error in
                         if let error = error {
-                            print("Error updating product after purchase: \(error.localizedDescription)")
+                            print("Error creating notification: \(error.localizedDescription)")
                         } else {
-                            print("Product updated successfully after purchase.")
+                            print("Notification created successfully!")
                         }
                     }
-                }
-                
-                CartService.shared.removeAllItemsInCart(for: userId) { error in
-                    if let error = error {
-                        print("Error clearing cart: \(error.localizedDescription)")
-                    } else {
-                        print("Cart cleared successfully")
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
-                            AppDelegate.setRoot(TabbarCustomController(), isNavi: true)
+                    
+                    for item in self.selectedCartItems {
+                        FirebaseUploader.shared.updateProductAfterPurchase(productId: item.idProduct, quantityPurchased: item.quantity) { error in
+                            if let error = error {
+                                print("Error updating product after purchase: \(error.localizedDescription)")
+                            } else {
+                                print("Product updated successfully after purchase.")
+                            }
+                        }
+                    }
+                    
+                    CartService.shared.removeAllItemsInCart(for: userId) { error in
+                        if let error = error {
+                            print("Error clearing cart: \(error.localizedDescription)")
+                        } else {
+                            print("Cart cleared successfully")
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                                AppDelegate.setRoot(TabbarCustomController(), isNavi: true)
+                            }
                         }
                     }
                 }

@@ -70,7 +70,7 @@ extension InvoiceVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedOrder = orders[indexPath.row]
-        let vc = DetailOrderVC()
+        let vc = DetailOrderVC(idOrder: "")
         
         if let statusOrder = selectedOrder["statusorder"] as? String,
            let totalPrice = selectedOrder["totalprice"] as? Int,
@@ -80,15 +80,16 @@ extension InvoiceVC: UITableViewDataSource, UITableViewDelegate {
            let idPay = selectedOrder["idpay"] as? String,
            let idUser = selectedOrder["iduser"] as? String,
            let priceShip = selectedOrder["priceship"] as? String {
-        
+            
             let detailModels = details.compactMap { detailDict -> DetailOrderModel? in
                 guard let name = detailDict["name"] as? String,
                       let price = detailDict["price"] as? String,
                       let quantity = detailDict["quantity"] as? Int,
-                      let image = detailDict["pic"] as? String else {
+                      let image = detailDict["pic"] as? String,
+                      let idProduct = detailDict["idProduct"]  as? String else {
                     return nil
                 }
-                return DetailOrderModel(name: name, price: price, quantity: quantity, image: image)
+                return DetailOrderModel(idProduct: idProduct, name: name, price: price, quantity: quantity, image: image)
             }
             
             let order = OrderModel(

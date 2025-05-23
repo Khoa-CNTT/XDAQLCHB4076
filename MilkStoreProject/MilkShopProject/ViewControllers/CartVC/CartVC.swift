@@ -74,7 +74,9 @@ class CartVC: BaseViewController {
                           let nameMilk = dataMilk.nameMilk,
                           let imageProduct = dataMilk.imgMilk,
                           let price = dataMilk.price
-                    else { return }
+                    else {
+                        return
+                    }
                     
                     let cartModel = CartModel(idProduct: productId,
                                               idUser: userId,
@@ -172,6 +174,20 @@ extension CartVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cartItem = cartItems[indexPath.row]
+        let idProduct = cartItem.idProduct
+
+        // Lấy DataMilkObject từ Realm (hoặc Firestore nếu cần)
+        if let dataMilk = RealmManager.shared.getAll(for: DataMilkObject.self).first(where: { $0.idProduct == idProduct }) {
+            let detailVC = DetailProductsVC(dataMilk: dataMilk)
+            self.push(detailVC)
+        } else {
+            // Nếu không tìm thấy, có thể show alert hoặc fetch từ Firestore
+            self.showToast(message: "Không tìm thấy thông tin sản phẩm!")
+        }
+    }
 }
 
 extension CartVC: ProductCartCellDelegate {
@@ -186,6 +202,8 @@ extension CartVC: ProductCartCellDelegate {
             
             self.cartItems.remove(at: indexPath.row)
             self.productsInCartTableView.deleteRows(at: [indexPath], with: .automatic)
+            self.productEmptyView.isHidden = !self.cartItems.isEmpty
+            self.productsInCartTableView.reloadData()
             self.updateTotalPrice()
         }
     }

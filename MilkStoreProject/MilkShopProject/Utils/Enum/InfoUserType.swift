@@ -12,7 +12,7 @@ enum InfoUserType: Int, CaseIterable  {
     case order
     case cart
     case address
-    case contact
+//    case contact
     case logout
     
     var iconName: UIImage? {
@@ -29,8 +29,8 @@ enum InfoUserType: Int, CaseIterable  {
             return .icLogout
         case .address:
             return .icAddress
-        case .contact:
-            return .icContact
+//        case .contact:
+//            return .icContact
         }
     }
     
@@ -48,8 +48,8 @@ enum InfoUserType: Int, CaseIterable  {
             return "Đăng xuất"
         case .address:
             return "Địa chỉ"
-        case .contact:
-            return "Liên hệ"
+//        case .contact:
+//            return "Liên hệ"
         }
     }
 }

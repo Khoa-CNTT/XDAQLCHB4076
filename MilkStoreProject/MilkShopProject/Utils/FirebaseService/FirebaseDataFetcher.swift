@@ -84,6 +84,21 @@ class FirebaseDataFetcher {
         }
     }
     
+    func deleteUserAddress(uid: String, addressToDelete: String, completion: ((Error?) -> Void)? = nil) {
+        let userRef = db.collection("usernew").document(uid)
+        
+        userRef.updateData([
+            "address": FieldValue.arrayRemove([addressToDelete])
+        ]) { error in
+            if let error = error {
+                print("[HL-LOG] Delete address error: \(error.localizedDescription)")
+            } else {
+                print("[HL-LOG] Address deleted successfully.")
+            }
+            completion?(error)
+        }
+    }
+    
     func fetchUserAddresses(uid: String, completion: @escaping ([String]?, Error?) -> Void) {
         let userRef = db.collection("usernew").document(uid)
         
@@ -118,7 +133,6 @@ class FirebaseDataFetcher {
     }
     
     func fetchOrders(for userId: String, completion: @escaping ([[String: Any]]?, Error?) -> Void) {
-        
         db.collection("order").whereField("iduser", isEqualTo: userId).getDocuments { snapshot, error in
             if let error = error {
                 completion(nil, error)
@@ -127,7 +141,9 @@ class FirebaseDataFetcher {
             
             var orders: [[String: Any]] = []
             snapshot?.documents.forEach { document in
-                orders.append(document.data())
+                var data = document.data()
+                data["documentID"] = document.documentID
+                orders.append(data)
             }
             
             completion(orders, nil)
@@ -135,7 +151,6 @@ class FirebaseDataFetcher {
     }
     
     func fetchAllOrders(completion: @escaping ([[String: Any]]?, Error?) -> Void) {
-        
         db.collection("order").getDocuments { snapshot, error in
             if let error = error {
                 completion(nil, error)
@@ -144,10 +159,84 @@ class FirebaseDataFetcher {
             
             var orders: [[String: Any]] = []
             snapshot?.documents.forEach { document in
-                orders.append(document.data())
+                var data = document.data()
+                data["documentID"] = document.documentID
+                orders.append(data)
             }
             
             completion(orders, nil)
+        }
+    }
+    
+    func fetchAllNotifications(completion: @escaping ([[String: Any]]?, Error?) -> Void) {
+        db.collection("notification")
+            .whereField("role", isEqualTo: true)
+            .getDocuments { snapshot, error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            var notifications: [[String: Any]] = []
+            snapshot?.documents.forEach { document in
+                var data = document.data()
+                data["documentID"] = document.documentID
+                notifications.append(data)
+            }
+            completion(notifications, nil)
+        }
+    }
+    
+    func fetchNotifications(completion: @escaping ([[String: Any]]?, Error?) -> Void) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("User ID not found")
+            return
+        }
+        
+        db.collection("notification")
+            .whereField("role", isEqualTo: false)
+            .whereField("name", isEqualTo: userId).getDocuments { snapshot, error in
+            if let error = error {
+                completion(nil, error)
+                return
+            }
+            var notifications: [[String: Any]] = []
+            snapshot?.documents.forEach { document in
+                var data = document.data()
+                data["documentID"] = document.documentID
+                notifications.append(data)
+            }
+            completion(notifications, nil)
+        }
+    }
+    
+    func updateNotificationSeenStatus(notificationId: String, completion: ((Error?) -> Void)? = nil) {
+        db.collection("notification").document(notificationId).updateData([
+            "isSeen": true
+        ]) { error in
+            if let error = error {
+                print("Error updating notification status: \(error.localizedDescription)")
+            } else {
+                print("Notification status updated successfully")
+            }
+            completion?(error)
+        }
+    }
+    
+    func fetchOrderById(idOrder: String, completion: @escaping ([String: Any]?, Error?) -> Void) {
+        db.collection("order").document(idOrder).getDocument { document, error in
+            if let error = error {
+                print("Error fetching order: \(error.localizedDescription)")
+                completion(nil, error)
+                return
+            }
+            
+            guard let document = document, document.exists else {
+                print("Order not found")
+                completion(nil, NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Order not found"]))
+                return
+            }
+            
+            completion(document.data(), nil)
         }
     }
 }

@@ -193,23 +193,9 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OXP-Hc-E02">
-                                                                    <rect key="frame" x="343" y="10" width="30" height="30"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="OXP-Hc-E02" secondAttribute="height" id="OL5-hK-gSr"/>
-                                                                        <constraint firstAttribute="width" constant="30" id="mnj-Z3-hmc"/>
-                                                                    </constraints>
-                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                    <state key="normal" image="Tabbar/ic_dropDown"/>
-                                                                    <connections>
-                                                                        <action selector="didTapDropdownMenu:" destination="-1" eventType="touchUpInside" id="kWd-mM-PFS"/>
-                                                                    </connections>
-                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.29019607843137252" green="0.80784313725490198" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstItem="OXP-Hc-E02" firstAttribute="centerY" secondItem="BIU-QK-dR2" secondAttribute="centerY" id="5EP-Dm-FX7"/>
-                                                                <constraint firstAttribute="trailing" secondItem="OXP-Hc-E02" secondAttribute="trailing" constant="20" id="A60-go-bwX"/>
                                                                 <constraint firstItem="nEf-FO-WaN" firstAttribute="centerY" secondItem="BIU-QK-dR2" secondAttribute="centerY" id="E8Z-ex-7VO"/>
                                                                 <constraint firstAttribute="height" constant="50" id="Ppl-oy-vBt"/>
                                                                 <constraint firstItem="nEf-FO-WaN" firstAttribute="centerX" secondItem="BIU-QK-dR2" secondAttribute="centerX" id="fOR-Zg-Db9"/>
@@ -271,25 +257,11 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aoI-PF-QUx">
-                                                                    <rect key="frame" x="343" y="10" width="30" height="30"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="aoI-PF-QUx" secondAttribute="height" id="Bsv-8l-loa"/>
-                                                                        <constraint firstAttribute="width" constant="30" id="FJw-EF-Bza"/>
-                                                                    </constraints>
-                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                    <state key="normal" image="Tabbar/ic_dropDown"/>
-                                                                    <connections>
-                                                                        <action selector="didTapDropdownMenu:" destination="-1" eventType="touchUpInside" id="U9z-HL-cfO"/>
-                                                                    </connections>
-                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.2901960784" green="0.80784313730000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstItem="aoI-PF-QUx" firstAttribute="centerY" secondItem="Lqb-y9-c9X" secondAttribute="centerY" id="KEz-Xr-qAo"/>
                                                                 <constraint firstItem="NSf-Gh-xxO" firstAttribute="centerX" secondItem="Lqb-y9-c9X" secondAttribute="centerX" id="d5Z-cM-I2a"/>
                                                                 <constraint firstAttribute="height" constant="50" id="iaz-cw-sUX"/>
-                                                                <constraint firstAttribute="trailing" secondItem="aoI-PF-QUx" secondAttribute="trailing" constant="20" id="kWH-2I-W3Z"/>
                                                                 <constraint firstItem="NSf-Gh-xxO" firstAttribute="centerY" secondItem="Lqb-y9-c9X" secondAttribute="centerY" id="sSc-Bs-j0M"/>
                                                             </constraints>
                                                         </view>
@@ -349,26 +321,12 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3w-FA-iM0">
-                                                                    <rect key="frame" x="343" y="10" width="30" height="30"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="i3w-FA-iM0" secondAttribute="height" id="I8g-qr-W3A"/>
-                                                                        <constraint firstAttribute="width" constant="30" id="TXh-7T-7wY"/>
-                                                                    </constraints>
-                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                    <state key="normal" image="Tabbar/ic_dropDown"/>
-                                                                    <connections>
-                                                                        <action selector="didTapDropdownMenu:" destination="-1" eventType="touchUpInside" id="KnU-1m-XxZ"/>
-                                                                    </connections>
-                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.2901960784" green="0.80784313730000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="trailing" secondItem="i3w-FA-iM0" secondAttribute="trailing" constant="20" id="4J8-r7-T0s"/>
                                                                 <constraint firstAttribute="height" constant="50" id="TMt-5C-6R6"/>
                                                                 <constraint firstItem="Wxb-M2-7TD" firstAttribute="centerX" secondItem="jhW-Kl-yMq" secondAttribute="centerX" id="UHl-2a-5X0"/>
                                                                 <constraint firstItem="Wxb-M2-7TD" firstAttribute="centerY" secondItem="jhW-Kl-yMq" secondAttribute="centerY" id="a5T-5P-Q5t"/>
-                                                                <constraint firstItem="i3w-FA-iM0" firstAttribute="centerY" secondItem="jhW-Kl-yMq" secondAttribute="centerY" id="f5d-NW-AkW"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMP-vD-lg7">
@@ -427,25 +385,11 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKt-Iq-lG6">
-                                                                    <rect key="frame" x="343" y="10" width="30" height="30"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="30" id="r19-HX-wmY"/>
-                                                                        <constraint firstAttribute="width" secondItem="rKt-Iq-lG6" secondAttribute="height" id="rro-lk-bRA"/>
-                                                                    </constraints>
-                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                    <state key="normal" image="Tabbar/ic_dropDown"/>
-                                                                    <connections>
-                                                                        <action selector="didTapDropdownMenu:" destination="-1" eventType="touchUpInside" id="APN-Cv-4tB"/>
-                                                                    </connections>
-                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.2901960784" green="0.80784313730000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="4L5-D2-1fI"/>
-                                                                <constraint firstAttribute="trailing" secondItem="rKt-Iq-lG6" secondAttribute="trailing" constant="20" id="Gh4-yk-f3t"/>
                                                                 <constraint firstItem="f3h-kt-mRR" firstAttribute="centerY" secondItem="15r-gd-A2u" secondAttribute="centerY" id="Mub-3W-Q6h"/>
-                                                                <constraint firstItem="rKt-Iq-lG6" firstAttribute="centerY" secondItem="15r-gd-A2u" secondAttribute="centerY" id="NTl-15-oxd"/>
                                                                 <constraint firstItem="f3h-kt-mRR" firstAttribute="centerX" secondItem="15r-gd-A2u" secondAttribute="centerX" id="Y0v-wH-AQj"/>
                                                             </constraints>
                                                         </view>
@@ -505,26 +449,12 @@
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2K-Du-aEU">
-                                                                    <rect key="frame" x="343" y="10" width="30" height="30"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="width" constant="30" id="HW4-fJ-wS5"/>
-                                                                        <constraint firstAttribute="width" secondItem="T2K-Du-aEU" secondAttribute="height" id="fbl-bC-yqy"/>
-                                                                    </constraints>
-                                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                                    <state key="normal" image="Tabbar/ic_dropDown"/>
-                                                                    <connections>
-                                                                        <action selector="didTapDropdownMenu:" destination="-1" eventType="touchUpInside" id="Fgd-un-zdB"/>
-                                                                    </connections>
-                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" red="0.2901960784" green="0.80784313730000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="5L1-Rb-Ouf"/>
                                                                 <constraint firstItem="bOv-b4-4PY" firstAttribute="centerY" secondItem="nj6-dS-Tyi" secondAttribute="centerY" id="H5h-Ju-pag"/>
-                                                                <constraint firstItem="T2K-Du-aEU" firstAttribute="centerY" secondItem="nj6-dS-Tyi" secondAttribute="centerY" id="Ner-Q9-ofM"/>
                                                                 <constraint firstItem="bOv-b4-4PY" firstAttribute="centerX" secondItem="nj6-dS-Tyi" secondAttribute="centerX" id="hd5-DR-xby"/>
-                                                                <constraint firstAttribute="trailing" secondItem="T2K-Du-aEU" secondAttribute="trailing" constant="20" id="kLc-QR-4nB"/>
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cml-zU-6RB">
@@ -642,7 +572,6 @@
     </objects>
     <resources>
         <image name="Tabbar/ic_cart" width="28" height="28"/>
-        <image name="Tabbar/ic_dropDown" width="24" height="24"/>
         <image name="icSearch" width="24" height="24.333333969116211"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

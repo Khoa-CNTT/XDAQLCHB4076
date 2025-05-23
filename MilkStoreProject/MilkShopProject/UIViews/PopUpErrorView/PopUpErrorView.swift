@@ -63,22 +63,10 @@ final class PopUpErrorView: UIView {
     }
     
     @IBAction func didClickTryAgainButton(_ sender: UIButton) {
-        do {
-            try Auth.auth().signOut()
-            removeAnimationView()
-        } catch {
-            print("Error logging out: \(error.localizedDescription)")
-        }
         removeAnimationView()
     }
     
     @IBAction func didClickCancelButton(_ sender: UIButton) {
-        do {
-            try Auth.auth().signOut()
-            AppDelegate.setRoot(RegisterVC())
-        } catch {
-            print("Error logging out: \(error.localizedDescription)")
-        }
         removeAnimationView()
     }
 }

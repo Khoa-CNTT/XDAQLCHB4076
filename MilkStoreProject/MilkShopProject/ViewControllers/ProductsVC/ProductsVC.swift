@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class ProductsVC: BaseViewController {
     
@@ -15,7 +16,7 @@ class ProductsVC: BaseViewController {
     
     private var milks: [DataMilkObject] = []
     private var allMilks: [DataMilkObject] = []
-    private var indexselectedProdut = 0
+    private var indexselectedProdut = -1
     
     private var loadingIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
@@ -54,7 +55,37 @@ class ProductsVC: BaseViewController {
     }
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
-        showDeleteConfirmation()
+        if indexselectedProdut < 0 || indexselectedProdut >= milks.count {
+            showAlert(title: "Lỗi", message: "Vui lòng chọn sản phẩm cần xoá")
+            return
+        }
+        let product = milks[indexselectedProdut]
+        guard let idProduct = product.idProduct else { return }
+        let db = Firestore.firestore()
+        db.collection("order").getDocuments { [weak self] (snapshot, error) in
+            guard let self = self else { return }
+            if let error = error {
+                self.showToast(message: "Lỗi kiểm tra đơn hàng: \(error.localizedDescription)")
+                return
+            }
+            var isProductInOrder = false
+            for document in snapshot?.documents ?? [] {
+                if let details = document.data()["detail"] as? [[String: Any]] {
+                    for item in details {
+                        if let orderIdProduct = item["idProduct"] as? String, orderIdProduct == idProduct {
+                            isProductInOrder = true
+                            break
+                        }
+                    }
+                }
+                if isProductInOrder { break }
+            }
+            if isProductInOrder {
+                showAlert(title: "Lỗi ", message: "Có đơn hàng chứa sản phẩm nên không thể xoá")
+            } else {
+                self.showDeleteConfirmation()
+            }
+        }
     }
     
     @IBAction func deleteBackTapped(_ sender: UIButton) {
@@ -89,7 +120,8 @@ extension ProductsVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            print("push to add new product")
+            let vc = AddProductsVC()
+            self.push(vc)
         } else {
             let detailVC = DetailProductsVC(dataMilk: milks[indexPath.row - 1])
             self.push(detailVC)
@@ -99,8 +131,11 @@ extension ProductsVC: UITableViewDataSource, UITableViewDelegate {
 
 extension ProductsVC: ProductCellDelegate {
     func didTapSelectProductButton(indexPath: IndexPath) {
-        self.indexselectedProdut = indexPath.row - 1
-        
+        if indexPath.row > 0 {
+            self.indexselectedProdut = indexPath.row - 1
+        } else {
+            self.indexselectedProdut = -1
+        }
     }
 }
 
@@ -171,16 +206,43 @@ extension ProductsVC {
     
     private func deleteProduct(at index: Int) {
         let product = milks[index]
-        let idProduct = product.idProduct
-        RealmManager.shared.remove(product)
-        if let idProduct = idProduct {
-            FirebaseUploader.shared.deleteProductFromFirebase(idProduct: idProduct) { [weak self] error in
-                guard let self = self else { return }
-                self.allMilks = RealmManager.shared.getAll(for: DataMilkObject.self)
-                self.milks = self.allMilks
-                self.productTableView.reloadData()
-                print("delete item:\(idProduct) at \(index)")
-                self.loadingIndicator.stopAnimating()
+        guard let idProduct = product.idProduct else { return }
+        
+        let db = Firestore.firestore()
+        db.collection("order").getDocuments { [weak self] (snapshot, error) in
+            guard let self = self else { return }
+            if let error = error {
+                self.showToast(message: "Lỗi kiểm tra đơn hàng: \(error.localizedDescription)")
+                return
+            }
+            var isProductInOrder = false
+            for document in snapshot?.documents ?? [] {
+                if let details = document.data()["detail"] as? [[String: Any]] {
+                    for item in details {
+                        if let orderIdProduct = item["idProduct"] as? String, orderIdProduct == idProduct {
+                            isProductInOrder = true
+                            break
+                        }
+                    }
+                }
+                if isProductInOrder { break }
+            }
+            if isProductInOrder {
+                self.showToast(message: "Sản phẩm đang có trong đơn hàng, không thể xóa!")
+            } else {
+                RealmManager.shared.remove(product)
+                FirebaseUploader.shared.deleteProductFromFirebase(idProduct: idProduct) { [weak self] error in
+                    guard let self = self else { return }
+                    if let error = error {
+                        self.showToast(message: "Lỗi xóa sản phẩm: \(error.localizedDescription)")
+                        return
+                    }
+                    self.allMilks = RealmManager.shared.getAll(for: DataMilkObject.self)
+                    self.milks = self.allMilks
+                    self.productTableView.reloadData()
+                    self.showToast(message: "Xóa sản phẩm thành công!")
+                    self.loadingIndicator.stopAnimating()
+                }
             }
         }
     }

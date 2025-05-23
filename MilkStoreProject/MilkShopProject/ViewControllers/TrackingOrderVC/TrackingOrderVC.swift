@@ -84,9 +84,8 @@ extension TrackingOrderVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         if let imgLink = order["detail"] as? [[String: Any]], let imageUrlString = imgLink.first?["pic"] as? String {
-            if let url = URL(string: imageUrlString) {
-                cell.productOrderImgView.kf.setImage(with: url, placeholder: UIImage(named: "placeholder"))
-            }
+             let url = imageUrlString
+             cell.productOrderImgView.loadImage(from: url)
         }
         
         if let details = order["detail"] as? [[String: Any]], let name = details.first?["name"] as? String {
@@ -111,7 +110,12 @@ extension TrackingOrderVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedOrder = orderData[indexPath.row]
-        let vc = DetailOrderVC()
+        guard let documentID = selectedOrder["documentID"] as? String else {
+            print("Document ID not found")
+            return
+        }
+        
+        let vc = DetailOrderVC(idOrder: documentID)
         
         if let statusOrder = selectedOrder["statusorder"] as? String,
            let totalPrice = selectedOrder["totalprice"] as? Int,
@@ -126,10 +130,11 @@ extension TrackingOrderVC: UITableViewDelegate, UITableViewDataSource {
                 guard let name = detailDict["name"] as? String,
                       let price = detailDict["price"] as? String,
                       let quantity = detailDict["quantity"] as? Int,
-                      let image = detailDict["pic"] as? String else {
+                      let image = detailDict["pic"] as? String,
+                      let idProduct = detailDict["idProduct"]  as? String else {
                     return nil
                 }
-                return DetailOrderModel(name: name, price: price, quantity: quantity, image: image)
+                return DetailOrderModel(idProduct: idProduct, name: name, price: price, quantity: quantity, image: image)
             }
             
             let order = OrderModel(
@@ -143,9 +148,7 @@ extension TrackingOrderVC: UITableViewDelegate, UITableViewDataSource {
                 totalPrice: totalPrice)
             
             vc.order = order
-            
             self.push(vc)
         }
-        
     }
 }

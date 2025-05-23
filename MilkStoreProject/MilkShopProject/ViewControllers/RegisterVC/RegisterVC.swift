@@ -71,55 +71,64 @@ class RegisterVC: BaseViewController {
         reEnterPassTF.delegate = self
     }
     
-    private func signIn() {
-        if isValidPassword(passwordAccount, confirmation: confirmPasswordAccount) {
-                    Auth.auth().createUser(withEmail: emailAccount, password: passwordAccount) { result, error in
-                        if let error = error {
-                            // View Error
-                            DispatchQueue.main.async {
-                                let popUpView = PopUpErrorView(frame: self.view.frame)
-                                self.view.addSubview(popUpView)
-                                UIView.animate(withDuration: 0.3) {
-                                    popUpView.titleLabel.text = "Lỗi Tạo Tài Khoản"
-                                    popUpView.messageLabel.text = "Email đã được sử dụng.Vui lòng sử dụng email khác."
-                                    popUpView.contentView.alpha = 1
-                                    popUpView.blurView.alpha = 0.25
-                                    popUpView.contentView.transform = .identity
-                                }
-                            }
-                            print("[HL-LOG] Error - ", error.localizedDescription)
-                        } else if let user = result?.user {
-                            let uid = user.uid
-                            
-                            DispatchQueue.main.async {
-                                let popUpView = PopUpSuccessSignUpView(frame: self.view.frame)
-                                self.view.addSubview(popUpView)
-                                UIView.animate(withDuration: 0.3) {
-                                    popUpView.titleLabel.text = "Tạo tài khoản thành công"
-                                    popUpView.messageLabel.text = "Tài khoản đã được tạo thành công. Hãy tận hưởng niềm vui của sản phẩm."
-                                    popUpView.contentView.alpha = 1
-                                    popUpView.blurView.alpha = 0.25
-                                    popUpView.contentView.transform = .identity
-                                }
-                            }
-                            let accountInfoData = AccountInfoModel(email: self.emailAccount, phone: self.phoneAccount, username: self.nameAccount, role: "false", address: [], password: self.passwordAccount, authcode: self.authen)
-                            UDHelper.nameUser = self.nameAccount
-                            UDHelper.phoneUser = self.phoneAccount
-//                            UDHelper.roleUser = self.role
-                            UDHelper.address = self.address
-                            UDHelper.passWord = self.passwordAccount
-                            UDHelper.authenCode = self.authen
-                            UDHelper.email = self.emailAccount
-                            FirestoreDatabaseManager.shared.writeAccountInfoDataToFirestore(account_info: accountInfoData)
-                        }
-                    }
-                } else {
-                    // View Error
-                }
+    @IBAction func didTapBackInButton(_ sender: Any) {
+        self.back()
     }
     
+    private func signIn() {
+        guard passwordAccount == confirmPasswordAccount else {
+            showAlert(title: "", message: "Mật khẩu xác nhận không khớp với mật khẩu.")
+            return
+        }
+
+        guard isValidPassword(passwordAccount) else {
+            showAlert(title: "", message: "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt.")
+            return
+        }
+
+        Auth.auth().createUser(withEmail: emailAccount, password: passwordAccount) { result, error in
+            if let error = error {
+                DispatchQueue.main.async {
+                    let popUpView = PopUpErrorView(frame: self.view.frame)
+                    self.view.addSubview(popUpView)
+                    UIView.animate(withDuration: 0.3) {
+                        popUpView.titleLabel.text = "Lỗi Tạo Tài Khoản"
+                        popUpView.messageLabel.text = "Email đã được sử dụng. Vui lòng sử dụng email khác."
+                        popUpView.contentView.alpha = 1
+                        popUpView.blurView.alpha = 0.25
+                        popUpView.contentView.transform = .identity
+                    }
+                }
+                print("[HL-LOG] Error - ", error.localizedDescription)
+            } else if let user = result?.user {
+                let uid = user.uid
+                DispatchQueue.main.async {
+                    let popUpView = PopUpSuccessSignUpView(frame: self.view.frame)
+                    self.view.addSubview(popUpView)
+                    UIView.animate(withDuration: 0.3) {
+                        popUpView.titleLabel.text = "Tạo tài khoản thành công"
+                        popUpView.messageLabel.text = "Tài khoản đã được tạo thành công. Hãy tận hưởng niềm vui của sản phẩm."
+                        popUpView.contentView.alpha = 1
+                        popUpView.blurView.alpha = 0.25
+                        popUpView.contentView.transform = .identity
+                    }
+                }
+
+                let accountInfoData = AccountInfoModel(email: self.emailAccount, phone: self.phoneAccount, username: self.nameAccount, role: "false", address: [], password: self.passwordAccount, authcode: self.authen)
+                UDHelper.nameUser = self.nameAccount
+                UDHelper.phoneUser = self.phoneAccount
+                UDHelper.address = self.address
+                UDHelper.passWord = self.passwordAccount
+                UDHelper.authenCode = self.authen
+                UDHelper.email = self.emailAccount
+                FirestoreDatabaseManager.shared.writeAccountInfoDataToFirestore(account_info: accountInfoData)
+            }
+        }
+    }
+
+    
     func handleDataTextField() {
-        if !nameAccount.isEmpty && emailAccount.isValidEmail && !phoneAccount.isEmpty && isValidPassword(passwordAccount, confirmation: confirmPasswordAccount) {
+        if !nameAccount.isEmpty && emailAccount.isValidEmail && !phoneAccount.isEmpty && isValidPassword(passwordAccount) {
             signupButton.isEnabled = true
             self.signupButton.alpha = 1
         } else {

@@ -2,35 +2,43 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>CFBundleURLSchemes</string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>org.reactjs.native.example.demozpdk</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>demozpdk</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>app-1-1004457505013-ios-7c97e70748287e3a9b55bc</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>zalo</string>
+		<string>Zalopay</string>
+		<string>Zalopay.api.v2</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 	</dict>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>zalo</string>
-        <string>Zalopay</string>
-        <string>Zalopay.api.v2</string>
-    </array>
-    <key>CFBundleURLTypes</key>
-    <array>
-            <dict>
-                <key>CFBundleTypeRole</key>
-                <string>Editor</string>
-                <key>CFBundleURLName</key>
-                <string>CFBundleURLSchemes</string>
-            </dict>
-            <dict>
-                <key>CFBundleTypeRole</key>
-                <string>Editor</string>
-                <key>CFBundleURLName</key>
-                <string>org.reactjs.native.example.demozpdk</string>
-                <key>CFBundleURLSchemes</key>
-                <array>
-                    <string>demozpdk</string>
-                </array>
-            </dict>
-    </array>
 </dict>
 </plist>

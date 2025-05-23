@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84013B5B2DD4B40800D53CAB /* AddProductsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84013B5A2DD4B40800D53CAB /* AddProductsVC.xib */; };
+		84013B5C2DD4B40800D53CAB /* AddProductsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84013B592DD4B40800D53CAB /* AddProductsVC.swift */; };
 		840655A72DC115AB00B399A5 /* ProductObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840655A62DC115A100B399A5 /* ProductObject.swift */; };
 		840A839F2DCA718500A9296A /* ProvinceBottomSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840A839D2DCA718500A9296A /* ProvinceBottomSheetVC.swift */; };
 		840A83A02DCA718500A9296A /* ProvinceBottomSheetVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840A839E2DCA718500A9296A /* ProvinceBottomSheetVC.xib */; };
@@ -17,6 +19,8 @@
 		840D53632D92F84900F5597A /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D53602D92F84900F5597A /* RegisterVC.swift */; };
 		84145F082DCBB09C009868F7 /* AddressCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84145F062DCBB09C009868F7 /* AddressCell.swift */; };
 		84145F092DCBB09C009868F7 /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84145F072DCBB09C009868F7 /* AddressCell.xib */; };
+		84170A472DD637C20034FDD1 /* NewPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84170A452DD637C20034FDD1 /* NewPasswordVC.swift */; };
+		84170A482DD637C20034FDD1 /* NewPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84170A462DD637C20034FDD1 /* NewPasswordVC.xib */; };
 		8417C4272DCE5C48003D5186 /* ChangeInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8417C4252DCE5C48003D5186 /* ChangeInfoVC.swift */; };
 		8417C4282DCE5C48003D5186 /* ChangeInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8417C4262DCE5C48003D5186 /* ChangeInfoVC.xib */; };
 		841A39E02DCA635900B3E7CE /* AddAddressVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841A39DE2DCA635900B3E7CE /* AddAddressVC.swift */; };
@@ -62,6 +66,14 @@
 		847263D92DD0A3CA004E3359 /* NotificationUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847263D62DD0A3CA004E3359 /* NotificationUserVC.swift */; };
 		8472DF442DC91789004C5245 /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8472DF432DC91789004C5245 /* OrderCell.xib */; };
 		8472DF452DC91789004C5245 /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8472DF422DC91789004C5245 /* OrderCell.swift */; };
+		847BB4F62DDF090A006AFDFB /* HomeAdminVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847BB4F42DDF090A006AFDFB /* HomeAdminVC.swift */; };
+		847BB4F72DDF090A006AFDFB /* HomeAdminVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847BB4F52DDF090A006AFDFB /* HomeAdminVC.xib */; };
+		847DBA292DE0BC1B00077D4C /* HomeAdminCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 847DBA282DE0BC1B00077D4C /* HomeAdminCell.xib */; };
+		847DBA2A2DE0BC1B00077D4C /* HomeAdminCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847DBA272DE0BC1B00077D4C /* HomeAdminCell.swift */; };
+		8480BD672DD63048005C337C /* ForgotPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480BD652DD63048005C337C /* ForgotPasswordVC.swift */; };
+		8480BD682DD63048005C337C /* ForgotPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8480BD662DD63048005C337C /* ForgotPasswordVC.xib */; };
+		8480BD6C2DD63485005C337C /* AuthenPhoneNumberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8480BD6A2DD63485005C337C /* AuthenPhoneNumberVC.swift */; };
+		8480BD6D2DD63485005C337C /* AuthenPhoneNumberVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8480BD6B2DD63485005C337C /* AuthenPhoneNumberVC.xib */; };
 		84931A652DCCDF0300AF3E68 /* ZaloPayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84931A642DCCDF0200AF3E68 /* ZaloPayService.swift */; };
 		84931A692DCE4CDB00AF3E68 /* AccountVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84931A682DCE4CDB00AF3E68 /* AccountVC.xib */; };
 		84931A6A2DCE4CDB00AF3E68 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84931A672DCE4CDB00AF3E68 /* AccountVC.swift */; };
@@ -175,6 +187,8 @@
 /* Begin PBXFileReference section */
 		296A96E3ABFD8724987335F2 /* Pods-MilkShopProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MilkShopProject.release.xcconfig"; path = "Target Support Files/Pods-MilkShopProject/Pods-MilkShopProject.release.xcconfig"; sourceTree = "<group>"; };
 		59186C88DAB2869A83AD17B4 /* Pods_MilkShopProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MilkShopProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		84013B592DD4B40800D53CAB /* AddProductsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductsVC.swift; sourceTree = "<group>"; };
+		84013B5A2DD4B40800D53CAB /* AddProductsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddProductsVC.xib; sourceTree = "<group>"; };
 		840655A62DC115A100B399A5 /* ProductObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductObject.swift; sourceTree = "<group>"; };
 		840A839D2DCA718500A9296A /* ProvinceBottomSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProvinceBottomSheetVC.swift; sourceTree = "<group>"; };
 		840A839E2DCA718500A9296A /* ProvinceBottomSheetVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProvinceBottomSheetVC.xib; sourceTree = "<group>"; };
@@ -185,6 +199,8 @@
 		840D53612D92F84900F5597A /* RegisterVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterVC.xib; sourceTree = "<group>"; };
 		84145F062DCBB09C009868F7 /* AddressCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCell.swift; sourceTree = "<group>"; };
 		84145F072DCBB09C009868F7 /* AddressCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressCell.xib; sourceTree = "<group>"; };
+		84170A452DD637C20034FDD1 /* NewPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordVC.swift; sourceTree = "<group>"; };
+		84170A462DD637C20034FDD1 /* NewPasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewPasswordVC.xib; sourceTree = "<group>"; };
 		8417C4252DCE5C48003D5186 /* ChangeInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeInfoVC.swift; sourceTree = "<group>"; };
 		8417C4262DCE5C48003D5186 /* ChangeInfoVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeInfoVC.xib; sourceTree = "<group>"; };
 		841A39DE2DCA635900B3E7CE /* AddAddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAddressVC.swift; sourceTree = "<group>"; };
@@ -230,6 +246,14 @@
 		847263D72DD0A3CA004E3359 /* NotificationUserVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationUserVC.xib; sourceTree = "<group>"; };
 		8472DF422DC91789004C5245 /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		8472DF432DC91789004C5245 /* OrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
+		847BB4F42DDF090A006AFDFB /* HomeAdminVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAdminVC.swift; sourceTree = "<group>"; };
+		847BB4F52DDF090A006AFDFB /* HomeAdminVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAdminVC.xib; sourceTree = "<group>"; };
+		847DBA272DE0BC1B00077D4C /* HomeAdminCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeAdminCell.swift; sourceTree = "<group>"; };
+		847DBA282DE0BC1B00077D4C /* HomeAdminCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeAdminCell.xib; sourceTree = "<group>"; };
+		8480BD652DD63048005C337C /* ForgotPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordVC.swift; sourceTree = "<group>"; };
+		8480BD662DD63048005C337C /* ForgotPasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotPasswordVC.xib; sourceTree = "<group>"; };
+		8480BD6A2DD63485005C337C /* AuthenPhoneNumberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenPhoneNumberVC.swift; sourceTree = "<group>"; };
+		8480BD6B2DD63485005C337C /* AuthenPhoneNumberVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AuthenPhoneNumberVC.xib; sourceTree = "<group>"; };
 		84931A642DCCDF0200AF3E68 /* ZaloPayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZaloPayService.swift; sourceTree = "<group>"; };
 		84931A672DCE4CDB00AF3E68 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		84931A682DCE4CDB00AF3E68 /* AccountVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AccountVC.xib; sourceTree = "<group>"; };
@@ -316,6 +340,7 @@
 		84ADACF02DD0DBD800A8C269 /* ClientsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClientsVC.xib; sourceTree = "<group>"; };
 		84C0F45D2DCF306400CE8DD6 /* ChangePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordVC.swift; sourceTree = "<group>"; };
 		84C0F45E2DCF306400CE8DD6 /* ChangePasswordVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordVC.xib; sourceTree = "<group>"; };
+		84D54FDD2DD65344009F99B3 /* MilkShopProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MilkShopProject.entitlements; sourceTree = "<group>"; };
 		84EF28982DC8FFD0009C3A4B /* AddressVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressVC.swift; sourceTree = "<group>"; };
 		84EF28992DC8FFD0009C3A4B /* AddressVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressVC.xib; sourceTree = "<group>"; };
 		84EF289D2DC90E66009C3A4B /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
@@ -342,6 +367,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84013B582DD4B3F500D53CAB /* AddProductsVC */ = {
+			isa = PBXGroup;
+			children = (
+				84013B592DD4B40800D53CAB /* AddProductsVC.swift */,
+				84013B5A2DD4B40800D53CAB /* AddProductsVC.xib */,
+			);
+			path = AddProductsVC;
+			sourceTree = "<group>";
+		};
 		840A839C2DCA717400A9296A /* ProvinceBottomSheetVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +411,15 @@
 				84145F072DCBB09C009868F7 /* AddressCell.xib */,
 			);
 			path = AddressCell;
+			sourceTree = "<group>";
+		};
+		84170A442DD637A80034FDD1 /* NewPasswordVC */ = {
+			isa = PBXGroup;
+			children = (
+				84170A452DD637C20034FDD1 /* NewPasswordVC.swift */,
+				84170A462DD637C20034FDD1 /* NewPasswordVC.xib */,
+			);
+			path = NewPasswordVC;
 			sourceTree = "<group>";
 		};
 		8417C4242DCE5C30003D5186 /* ChangeInfoVC */ = {
@@ -573,6 +616,43 @@
 			path = OrderCell;
 			sourceTree = "<group>";
 		};
+		847BB4F32DDF08F2006AFDFB /* HomeAdminVC */ = {
+			isa = PBXGroup;
+			children = (
+				847DBA262DE0BBDD00077D4C /* HomeAdminCell */,
+				847BB4F42DDF090A006AFDFB /* HomeAdminVC.swift */,
+				847BB4F52DDF090A006AFDFB /* HomeAdminVC.xib */,
+			);
+			path = HomeAdminVC;
+			sourceTree = "<group>";
+		};
+		847DBA262DE0BBDD00077D4C /* HomeAdminCell */ = {
+			isa = PBXGroup;
+			children = (
+				847DBA272DE0BC1B00077D4C /* HomeAdminCell.swift */,
+				847DBA282DE0BC1B00077D4C /* HomeAdminCell.xib */,
+			);
+			path = HomeAdminCell;
+			sourceTree = "<group>";
+		};
+		8480BD642DD63031005C337C /* ForgotPasswordVC */ = {
+			isa = PBXGroup;
+			children = (
+				8480BD652DD63048005C337C /* ForgotPasswordVC.swift */,
+				8480BD662DD63048005C337C /* ForgotPasswordVC.xib */,
+			);
+			path = ForgotPasswordVC;
+			sourceTree = "<group>";
+		};
+		8480BD692DD63470005C337C /* AuthenPhoneNumberVC */ = {
+			isa = PBXGroup;
+			children = (
+				8480BD6A2DD63485005C337C /* AuthenPhoneNumberVC.swift */,
+				8480BD6B2DD63485005C337C /* AuthenPhoneNumberVC.xib */,
+			);
+			path = AuthenPhoneNumberVC;
+			sourceTree = "<group>";
+		};
 		84931A632DCCDEEF00AF3E68 /* ZaloPayService */ = {
 			isa = PBXGroup;
 			children = (
@@ -767,6 +847,7 @@
 		84A41FD32D9197DB007BCF6C /* MilkShopProject */ = {
 			isa = PBXGroup;
 			children = (
+				84D54FDD2DD65344009F99B3 /* MilkShopProject.entitlements */,
 				84A0F46C2D9D781200B47821 /* GoogleService-Info.plist */,
 				84A41FE22D9197DC007BCF6C /* Info.plist */,
 				84A0F46F2D9D7F3D00B47821 /* Data */,
@@ -861,6 +942,11 @@
 		84A420272D919D22007BCF6C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				847BB4F32DDF08F2006AFDFB /* HomeAdminVC */,
+				84170A442DD637A80034FDD1 /* NewPasswordVC */,
+				8480BD692DD63470005C337C /* AuthenPhoneNumberVC */,
+				8480BD642DD63031005C337C /* ForgotPasswordVC */,
+				84013B582DD4B3F500D53CAB /* AddProductsVC */,
 				84336F422DD3C5F000C0E9FD /* EditProductVC */,
 				84FC4EF72DD39FC300A457DF /* ProductsVC */,
 				84980EF02DD38D3C00257B03 /* InvoiceVC */,
@@ -1092,12 +1178,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				84A4202C2D919EDF007BCF6C /* SplashVC.xib in Resources */,
+				847BB4F72DDF090A006AFDFB /* HomeAdminVC.xib in Resources */,
 				84931A6E2DCE4F5D00AF3E68 /* InfoCell.xib in Resources */,
 				84A0F4392D99845E00B47821 /* HomeVC.xib in Resources */,
 				84A0F46D2D9D781200B47821 /* GoogleService-Info.plist in Resources */,
+				84170A482DD637C20034FDD1 /* NewPasswordVC.xib in Resources */,
 				84EF289A2DC8FFD0009C3A4B /* AddressVC.xib in Resources */,
 				84F8CADB2DC12DB100FCB0F9 /* ProductsCartCell.xib in Resources */,
 				84A41FDE2D9197DC007BCF6C /* Assets.xcassets in Resources */,
+				8480BD682DD63048005C337C /* ForgotPasswordVC.xib in Resources */,
 				84A4203A2D91A117007BCF6C /* LoginVC.xib in Resources */,
 				84145F092DCBB09C009868F7 /* AddressCell.xib in Resources */,
 				840A83A52DCA72A200A9296A /* ProvinceCell.xib in Resources */,
@@ -1121,7 +1210,9 @@
 				84FC4EFA2DD39FD500A457DF /* ProductsVC.xib in Resources */,
 				84A0F48C2D9D827300B47821 /* error.json in Resources */,
 				846E109B2DC243C4000CA00B /* loadingCart.json in Resources */,
+				84013B5B2DD4B40800D53CAB /* AddProductsVC.xib in Resources */,
 				84A0F4842D9D824200B47821 /* PopUpSuccesssSignInVC.xib in Resources */,
+				8480BD6D2DD63485005C337C /* AuthenPhoneNumberVC.xib in Resources */,
 				844495C52DD0ECEA000876C0 /* OrderPurchaseVC.xib in Resources */,
 				84336F462DD3C60200C0E9FD /* EditProductVC.xib in Resources */,
 				844495C02DD0DFCB000876C0 /* ClientCell.xib in Resources */,
@@ -1134,6 +1225,7 @@
 				84A0F4852D9D824200B47821 /* PopUpErrorView.xib in Resources */,
 				84A31F7E2DA6BE9D00202259 /* Milk Data.json in Resources */,
 				840CD36C2DC4FC1F00BEAD57 /* address.json in Resources */,
+				847DBA292DE0BC1B00077D4C /* HomeAdminCell.xib in Resources */,
 				844495CF2DD0F38F000876C0 /* TrackingOrderCell.xib in Resources */,
 				845EA6452DD11B420076EED2 /* SearchProductVC.xib in Resources */,
 				84931A692DCE4CDB00AF3E68 /* AccountVC.xib in Resources */,
@@ -1230,8 +1322,10 @@
 				84931A6F2DCE4F5D00AF3E68 /* InfoCell.swift in Sources */,
 				84A420252D9199BD007BCF6C /* UDKey.swift in Sources */,
 				841DA7602DA41D72008ED6B3 /* ProductsCell.swift in Sources */,
+				847DBA2A2DE0BC1B00077D4C /* HomeAdminCell.swift in Sources */,
 				8497AFD82DB01495008DBC22 /* ProductInfoTableCell.swift in Sources */,
 				84A41FD52D9197DB007BCF6C /* AppDelegate.swift in Sources */,
+				84013B5C2DD4B40800D53CAB /* AddProductsVC.swift in Sources */,
 				84931A652DCCDF0300AF3E68 /* ZaloPayService.swift in Sources */,
 				841A39E02DCA635900B3E7CE /* AddAddressVC.swift in Sources */,
 				845EA6442DD11B420076EED2 /* SearchProductVC.swift in Sources */,
@@ -1244,6 +1338,7 @@
 				84A420072D9199AF007BCF6C /* CheckNetwork+.swift in Sources */,
 				84A0F4642D9C360500B47821 /* String.swift in Sources */,
 				84A0F4702D9D7F3D00B47821 /* AccountInfoModel.swift in Sources */,
+				8480BD6C2DD63485005C337C /* AuthenPhoneNumberVC.swift in Sources */,
 				8472DF452DC91789004C5245 /* OrderCell.swift in Sources */,
 				840655A72DC115AB00B399A5 /* ProductObject.swift in Sources */,
 				844495CE2DD0F38F000876C0 /* TrackingOrderCell.swift in Sources */,
@@ -1272,6 +1367,8 @@
 				842C22072DB0026D003A667E /* DetailProductsVC.swift in Sources */,
 				84A4200B2D9199AF007BCF6C /* GradientView+.swift in Sources */,
 				842797042DBEA41600DAD0FD /* FirebaseDataFetcher.swift in Sources */,
+				84170A472DD637C20034FDD1 /* NewPasswordVC.swift in Sources */,
+				847BB4F62DDF090A006AFDFB /* HomeAdminVC.swift in Sources */,
 				84A420162D9199AF007BCF6C /* UIImage+.swift in Sources */,
 				84ADACE22DD0A4C400A8C269 /* NotiTableCell.swift in Sources */,
 				840D53632D92F84900F5597A /* RegisterVC.swift in Sources */,
@@ -1284,6 +1381,7 @@
 				84A4200E2D9199AF007BCF6C /* Number+.swift in Sources */,
 				84A4200C2D9199AF007BCF6C /* Logger+.swift in Sources */,
 				84A420322D919EF4007BCF6C /* BaseView.swift in Sources */,
+				8480BD672DD63048005C337C /* ForgotPasswordVC.swift in Sources */,
 				8417C4272DCE5C48003D5186 /* ChangeInfoVC.swift in Sources */,
 				84A420132D9199AF007BCF6C /* UIColor+.swift in Sources */,
 				84EF28A02DC90E66009C3A4B /* OrderVC.swift in Sources */,
@@ -1434,6 +1532,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MilkShopProject/MilkShopProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KHCP9V23YA;
@@ -1446,6 +1545,8 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MilkShopProject/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "MilkShopProject photo use";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1458,7 +1559,7 @@
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "\"-arch arm64 -arch x86_64\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vcong.MilkShopProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vcong.MilkShopProject1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -1473,6 +1574,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = MilkShopProject/MilkShopProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = KHCP9V23YA;
@@ -1485,6 +1587,8 @@
 				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MilkShopProject/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "MilkShopProject photo use";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -1497,7 +1601,7 @@
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "\"-arch arm64 -arch x86_64\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.vcong.MilkShopProject;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vcong.MilkShopProject1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

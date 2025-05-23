@@ -62,16 +62,8 @@ class ProductsCartCell: UITableViewCell {
         self.countProductTF.text = "\(items.quantity)"
         self.nameProductLabel.text = items.nameProduct
         self.priceProductLabel.text = "\(items.price)"
-        let url = URL(string: items.imageProduct)
-        self.productCartImageView.kf.indicatorType = .activity
-        self.productCartImageView.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "placeholder"),
-            options: [
-                .transition(.fade(0.3))
-            ]
-        )
-        
+        let imageUrl = items.imageProduct
+        productCartImageView.loadImage(from: imageUrl)
         let iconSelected = items.isSelected ? UIImage(named: "ic_Tick")?.withTintColor(.black) : UIImage(named: "ic_Untick")?.withTintColor(.black)
         self.selectedProductButton.setImage(iconSelected, for: .normal)
     }
